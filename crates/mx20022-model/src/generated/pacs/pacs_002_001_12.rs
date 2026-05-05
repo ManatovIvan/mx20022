@@ -1,5 +1,5 @@
 /*! Generated from ISO 20022 XSD schema.
- Namespace: `urn:iso:std:iso:20022:tech:xsd:pacs.002.001.12`*/
+Namespace: `urn:iso:std:iso:20022:tech:xsd:pacs.002.001.12`*/
 /// Fraction digits: 5
 /// Total digits: 18
 /// Minimum value (inclusive): 0
@@ -13,21 +13,19 @@ impl TryFrom<String> for ActiveOrHistoricCurrencyAndAmountSimpleType {
         {
             let value: &str = &value;
             {
-                let frac_count = value
-                    .find('.')
-                    .map_or(
-                        0,
-                        |dot| {
-                            value[dot + 1..].chars().filter(char::is_ascii_digit).count()
-                        },
-                    );
+                let frac_count = value.find('.').map_or(0, |dot| {
+                    value[dot + 1..]
+                        .chars()
+                        .filter(char::is_ascii_digit)
+                        .count()
+                });
                 let violated = frac_count > 5usize;
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::FractionDigits,
                         message: format!(
-                            "{} (got {})", "value exceeds maximum fraction digits 5",
-                            frac_count
+                            "{} (got {})",
+                            "value exceeds maximum fraction digits 5", frac_count
                         ),
                     });
                 }
@@ -39,8 +37,8 @@ impl TryFrom<String> for ActiveOrHistoricCurrencyAndAmountSimpleType {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::TotalDigits,
                         message: format!(
-                            "{} (got {})", "value exceeds maximum total digits 18",
-                            digit_count
+                            "{} (got {})",
+                            "value exceeds maximum total digits 18", digit_count
                         ),
                     });
                 }
@@ -52,9 +50,7 @@ impl TryFrom<String> for ActiveOrHistoricCurrencyAndAmountSimpleType {
 impl ActiveOrHistoricCurrencyAndAmountSimpleType {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -104,9 +100,7 @@ impl TryFrom<String> for ActiveOrHistoricCurrencyCode {
 impl ActiveOrHistoricCurrencyCode {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -155,9 +149,7 @@ impl TryFrom<String> for AnyBICDec2014Identifier {
                                 return true;
                             }
                             for &b in &bytes[pos..end] {
-                                if !(65u8..=90u8).contains(&b)
-                                    && !(48u8..=57u8).contains(&b)
-                                {
+                                if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                     return true;
                                 }
                             }
@@ -181,9 +173,7 @@ impl TryFrom<String> for AnyBICDec2014Identifier {
                                 return true;
                             }
                             for &b in &bytes[pos..end] {
-                                if !(65u8..=90u8).contains(&b)
-                                    && !(48u8..=57u8).contains(&b)
-                                {
+                                if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                     return true;
                                 }
                             }
@@ -234,9 +224,7 @@ impl TryFrom<String> for AnyBICDec2014Identifier {
 impl AnyBICDec2014Identifier {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -270,9 +258,7 @@ impl TryFrom<String> for BICFIDec2014Identifier {
                                 return true;
                             }
                             for &b in &bytes[pos..end] {
-                                if !(65u8..=90u8).contains(&b)
-                                    && !(48u8..=57u8).contains(&b)
-                                {
+                                if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                     return true;
                                 }
                             }
@@ -296,9 +282,7 @@ impl TryFrom<String> for BICFIDec2014Identifier {
                                 return true;
                             }
                             for &b in &bytes[pos..end] {
-                                if !(65u8..=90u8).contains(&b)
-                                    && !(48u8..=57u8).contains(&b)
-                                {
+                                if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                     return true;
                                 }
                             }
@@ -349,9 +333,7 @@ impl TryFrom<String> for BICFIDec2014Identifier {
 impl BICFIDec2014Identifier {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -408,9 +390,7 @@ impl TryFrom<String> for CountryCode {
 impl CountryCode {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -438,21 +418,19 @@ impl TryFrom<String> for DecimalNumber {
         {
             let value: &str = &value;
             {
-                let frac_count = value
-                    .find('.')
-                    .map_or(
-                        0,
-                        |dot| {
-                            value[dot + 1..].chars().filter(char::is_ascii_digit).count()
-                        },
-                    );
+                let frac_count = value.find('.').map_or(0, |dot| {
+                    value[dot + 1..]
+                        .chars()
+                        .filter(char::is_ascii_digit)
+                        .count()
+                });
                 let violated = frac_count > 17usize;
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::FractionDigits,
                         message: format!(
-                            "{} (got {})", "value exceeds maximum fraction digits 17",
-                            frac_count
+                            "{} (got {})",
+                            "value exceeds maximum fraction digits 17", frac_count
                         ),
                     });
                 }
@@ -464,8 +442,8 @@ impl TryFrom<String> for DecimalNumber {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::TotalDigits,
                         message: format!(
-                            "{} (got {})", "value exceeds maximum total digits 18",
-                            digit_count
+                            "{} (got {})",
+                            "value exceeds maximum total digits 18", digit_count
                         ),
                     });
                 }
@@ -477,9 +455,7 @@ impl TryFrom<String> for DecimalNumber {
 impl DecimalNumber {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -575,9 +551,7 @@ impl TryFrom<String> for Exact2NumericText {
 impl Exact2NumericText {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -602,30 +576,33 @@ impl TryFrom<String> for Exact4AlphaNumericText {
                     bytes.len() != 4usize
                         || ({
                             let b = bytes[0usize];
-                            !(97u8..=122u8).contains(&b) && !(65u8..=90u8).contains(&b)
+                            !(97u8..=122u8).contains(&b)
+                                && !(65u8..=90u8).contains(&b)
                                 && !(48u8..=57u8).contains(&b)
                         })
                         || ({
                             let b = bytes[1usize];
-                            !(97u8..=122u8).contains(&b) && !(65u8..=90u8).contains(&b)
+                            !(97u8..=122u8).contains(&b)
+                                && !(65u8..=90u8).contains(&b)
                                 && !(48u8..=57u8).contains(&b)
                         })
                         || ({
                             let b = bytes[2usize];
-                            !(97u8..=122u8).contains(&b) && !(65u8..=90u8).contains(&b)
+                            !(97u8..=122u8).contains(&b)
+                                && !(65u8..=90u8).contains(&b)
                                 && !(48u8..=57u8).contains(&b)
                         })
                         || ({
                             let b = bytes[3usize];
-                            !(97u8..=122u8).contains(&b) && !(65u8..=90u8).contains(&b)
+                            !(97u8..=122u8).contains(&b)
+                                && !(65u8..=90u8).contains(&b)
                                 && !(48u8..=57u8).contains(&b)
                         })
                 };
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::Pattern,
-                        message: "value does not match pattern [a-zA-Z0-9]{4}"
-                            .to_string(),
+                        message: "value does not match pattern [a-zA-Z0-9]{4}".to_string(),
                     });
                 }
             }
@@ -636,9 +613,7 @@ impl TryFrom<String> for Exact4AlphaNumericText {
 impl Exact4AlphaNumericText {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -665,7 +640,8 @@ impl TryFrom<String> for ExternalAccountIdentification1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -676,9 +652,7 @@ impl TryFrom<String> for ExternalAccountIdentification1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -689,9 +663,7 @@ impl TryFrom<String> for ExternalAccountIdentification1Code {
 impl ExternalAccountIdentification1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -718,7 +690,8 @@ impl TryFrom<String> for ExternalCashAccountType1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -729,9 +702,7 @@ impl TryFrom<String> for ExternalCashAccountType1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -742,9 +713,7 @@ impl TryFrom<String> for ExternalCashAccountType1Code {
 impl ExternalCashAccountType1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -771,7 +740,8 @@ impl TryFrom<String> for ExternalCashClearingSystem1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -782,9 +752,7 @@ impl TryFrom<String> for ExternalCashClearingSystem1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 3", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 3", len),
                     });
                 }
             }
@@ -795,9 +763,7 @@ impl TryFrom<String> for ExternalCashClearingSystem1Code {
 impl ExternalCashClearingSystem1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -824,7 +790,8 @@ impl TryFrom<String> for ExternalCategoryPurpose1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -835,9 +802,7 @@ impl TryFrom<String> for ExternalCategoryPurpose1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -848,9 +813,7 @@ impl TryFrom<String> for ExternalCategoryPurpose1Code {
 impl ExternalCategoryPurpose1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -877,7 +840,8 @@ impl TryFrom<String> for ExternalClearingSystemIdentification1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -888,9 +852,7 @@ impl TryFrom<String> for ExternalClearingSystemIdentification1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 5", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 5", len),
                     });
                 }
             }
@@ -901,9 +863,7 @@ impl TryFrom<String> for ExternalClearingSystemIdentification1Code {
 impl ExternalClearingSystemIdentification1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -930,7 +890,8 @@ impl TryFrom<String> for ExternalDiscountAmountType1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -941,9 +902,7 @@ impl TryFrom<String> for ExternalDiscountAmountType1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -954,9 +913,7 @@ impl TryFrom<String> for ExternalDiscountAmountType1Code {
 impl ExternalDiscountAmountType1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -983,7 +940,8 @@ impl TryFrom<String> for ExternalDocumentLineType1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -994,9 +952,7 @@ impl TryFrom<String> for ExternalDocumentLineType1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1007,9 +963,7 @@ impl TryFrom<String> for ExternalDocumentLineType1Code {
 impl ExternalDocumentLineType1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1036,7 +990,8 @@ impl TryFrom<String> for ExternalFinancialInstitutionIdentification1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1047,9 +1002,7 @@ impl TryFrom<String> for ExternalFinancialInstitutionIdentification1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1060,9 +1013,7 @@ impl TryFrom<String> for ExternalFinancialInstitutionIdentification1Code {
 impl ExternalFinancialInstitutionIdentification1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1089,7 +1040,8 @@ impl TryFrom<String> for ExternalGarnishmentType1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1100,9 +1052,7 @@ impl TryFrom<String> for ExternalGarnishmentType1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1113,9 +1063,7 @@ impl TryFrom<String> for ExternalGarnishmentType1Code {
 impl ExternalGarnishmentType1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1142,7 +1090,8 @@ impl TryFrom<String> for ExternalLocalInstrument1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1153,9 +1102,7 @@ impl TryFrom<String> for ExternalLocalInstrument1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 35", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 35", len),
                     });
                 }
             }
@@ -1166,9 +1113,7 @@ impl TryFrom<String> for ExternalLocalInstrument1Code {
 impl ExternalLocalInstrument1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1195,7 +1140,8 @@ impl TryFrom<String> for ExternalMandateSetupReason1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1206,9 +1152,7 @@ impl TryFrom<String> for ExternalMandateSetupReason1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1219,9 +1163,7 @@ impl TryFrom<String> for ExternalMandateSetupReason1Code {
 impl ExternalMandateSetupReason1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1248,7 +1190,8 @@ impl TryFrom<String> for ExternalOrganisationIdentification1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1259,9 +1202,7 @@ impl TryFrom<String> for ExternalOrganisationIdentification1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1272,9 +1213,7 @@ impl TryFrom<String> for ExternalOrganisationIdentification1Code {
 impl ExternalOrganisationIdentification1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1301,7 +1240,8 @@ impl TryFrom<String> for ExternalPaymentGroupStatus1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1312,9 +1252,7 @@ impl TryFrom<String> for ExternalPaymentGroupStatus1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1325,9 +1263,7 @@ impl TryFrom<String> for ExternalPaymentGroupStatus1Code {
 impl ExternalPaymentGroupStatus1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1354,7 +1290,8 @@ impl TryFrom<String> for ExternalPaymentTransactionStatus1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1365,9 +1302,7 @@ impl TryFrom<String> for ExternalPaymentTransactionStatus1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1378,9 +1313,7 @@ impl TryFrom<String> for ExternalPaymentTransactionStatus1Code {
 impl ExternalPaymentTransactionStatus1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1407,7 +1340,8 @@ impl TryFrom<String> for ExternalPersonIdentification1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1418,9 +1352,7 @@ impl TryFrom<String> for ExternalPersonIdentification1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1431,9 +1363,7 @@ impl TryFrom<String> for ExternalPersonIdentification1Code {
 impl ExternalPersonIdentification1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1460,7 +1390,8 @@ impl TryFrom<String> for ExternalProxyAccountType1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1471,9 +1402,7 @@ impl TryFrom<String> for ExternalProxyAccountType1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1484,9 +1413,7 @@ impl TryFrom<String> for ExternalProxyAccountType1Code {
 impl ExternalProxyAccountType1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1513,7 +1440,8 @@ impl TryFrom<String> for ExternalPurpose1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1524,9 +1452,7 @@ impl TryFrom<String> for ExternalPurpose1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1537,9 +1463,7 @@ impl TryFrom<String> for ExternalPurpose1Code {
 impl ExternalPurpose1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1566,7 +1490,8 @@ impl TryFrom<String> for ExternalServiceLevel1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1577,9 +1502,7 @@ impl TryFrom<String> for ExternalServiceLevel1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1590,9 +1513,7 @@ impl TryFrom<String> for ExternalServiceLevel1Code {
 impl ExternalServiceLevel1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1619,7 +1540,8 @@ impl TryFrom<String> for ExternalStatusReason1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1630,9 +1552,7 @@ impl TryFrom<String> for ExternalStatusReason1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1643,9 +1563,7 @@ impl TryFrom<String> for ExternalStatusReason1Code {
 impl ExternalStatusReason1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1672,7 +1590,8 @@ impl TryFrom<String> for ExternalTaxAmountType1Code {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1683,9 +1602,7 @@ impl TryFrom<String> for ExternalTaxAmountType1Code {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -1696,9 +1613,7 @@ impl TryFrom<String> for ExternalTaxAmountType1Code {
 impl ExternalTaxAmountType1Code {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1803,8 +1718,9 @@ impl TryFrom<String> for IBAN2007Identifier {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::Pattern,
-                        message: "value does not match pattern [A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
-                            .to_string(),
+                        message:
+                            "value does not match pattern [A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
+                                .to_string(),
                     });
                 }
             }
@@ -1815,9 +1731,7 @@ impl TryFrom<String> for IBAN2007Identifier {
 impl IBAN2007Identifier {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1945,9 +1859,7 @@ impl TryFrom<String> for LEIIdentifier {
 impl LEIIdentifier {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -1983,7 +1895,8 @@ impl TryFrom<String> for Max1025Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -1994,9 +1907,7 @@ impl TryFrom<String> for Max1025Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 1025", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 1025", len),
                     });
                 }
             }
@@ -2007,9 +1918,7 @@ impl TryFrom<String> for Max1025Text {
 impl Max1025Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2036,7 +1945,8 @@ impl TryFrom<String> for Max105Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2047,9 +1957,7 @@ impl TryFrom<String> for Max105Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 105", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 105", len),
                     });
                 }
             }
@@ -2060,9 +1968,7 @@ impl TryFrom<String> for Max105Text {
 impl Max105Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2089,7 +1995,8 @@ impl TryFrom<String> for Max10KBinary {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2100,9 +2007,7 @@ impl TryFrom<String> for Max10KBinary {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 10240", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 10240", len),
                     });
                 }
             }
@@ -2113,9 +2018,7 @@ impl TryFrom<String> for Max10KBinary {
 impl Max10KBinary {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2142,7 +2045,8 @@ impl TryFrom<String> for Max128Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2153,9 +2057,7 @@ impl TryFrom<String> for Max128Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 128", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 128", len),
                     });
                 }
             }
@@ -2166,9 +2068,7 @@ impl TryFrom<String> for Max128Text {
 impl Max128Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2195,7 +2095,8 @@ impl TryFrom<String> for Max140Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2206,9 +2107,7 @@ impl TryFrom<String> for Max140Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 140", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 140", len),
                     });
                 }
             }
@@ -2219,9 +2118,7 @@ impl TryFrom<String> for Max140Text {
 impl Max140Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2289,9 +2186,7 @@ impl TryFrom<String> for Max15NumericText {
 impl Max15NumericText {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2318,7 +2213,8 @@ impl TryFrom<String> for Max16Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2329,9 +2225,7 @@ impl TryFrom<String> for Max16Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 16", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 16", len),
                     });
                 }
             }
@@ -2342,9 +2236,7 @@ impl TryFrom<String> for Max16Text {
 impl Max16Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2371,7 +2263,8 @@ impl TryFrom<String> for Max2048Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2382,9 +2275,7 @@ impl TryFrom<String> for Max2048Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 2048", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 2048", len),
                     });
                 }
             }
@@ -2395,9 +2286,7 @@ impl TryFrom<String> for Max2048Text {
 impl Max2048Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2424,7 +2313,8 @@ impl TryFrom<String> for Max34Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2435,9 +2325,7 @@ impl TryFrom<String> for Max34Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 34", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 34", len),
                     });
                 }
             }
@@ -2448,9 +2336,7 @@ impl TryFrom<String> for Max34Text {
 impl Max34Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2477,7 +2363,8 @@ impl TryFrom<String> for Max350Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2488,9 +2375,7 @@ impl TryFrom<String> for Max350Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 350", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 350", len),
                     });
                 }
             }
@@ -2501,9 +2386,7 @@ impl TryFrom<String> for Max350Text {
 impl Max350Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2530,7 +2413,8 @@ impl TryFrom<String> for Max35Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2541,9 +2425,7 @@ impl TryFrom<String> for Max35Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 35", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 35", len),
                     });
                 }
             }
@@ -2554,9 +2436,7 @@ impl TryFrom<String> for Max35Text {
 impl Max35Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2583,7 +2463,8 @@ impl TryFrom<String> for Max4Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2594,9 +2475,7 @@ impl TryFrom<String> for Max4Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 4", len),
                     });
                 }
             }
@@ -2607,9 +2486,7 @@ impl TryFrom<String> for Max4Text {
 impl Max4Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2636,7 +2513,8 @@ impl TryFrom<String> for Max70Text {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MinLength,
                         message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
+                            "{} (got {})",
+                            "value is shorter than minimum length 1", len
                         ),
                     });
                 }
@@ -2647,9 +2525,7 @@ impl TryFrom<String> for Max70Text {
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::MaxLength,
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 70", len
-                        ),
+                        message: format!("{} (got {})", "value exceeds maximum length 70", len),
                     });
                 }
             }
@@ -2660,9 +2536,7 @@ impl TryFrom<String> for Max70Text {
 impl Max70Text {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2696,21 +2570,19 @@ impl TryFrom<String> for Number {
         {
             let value: &str = &value;
             {
-                let frac_count = value
-                    .find('.')
-                    .map_or(
-                        0,
-                        |dot| {
-                            value[dot + 1..].chars().filter(char::is_ascii_digit).count()
-                        },
-                    );
+                let frac_count = value.find('.').map_or(0, |dot| {
+                    value[dot + 1..]
+                        .chars()
+                        .filter(char::is_ascii_digit)
+                        .count()
+                });
                 let violated = frac_count > 0usize;
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::FractionDigits,
                         message: format!(
-                            "{} (got {})", "value exceeds maximum fraction digits 0",
-                            frac_count
+                            "{} (got {})",
+                            "value exceeds maximum fraction digits 0", frac_count
                         ),
                     });
                 }
@@ -2722,8 +2594,8 @@ impl TryFrom<String> for Number {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::TotalDigits,
                         message: format!(
-                            "{} (got {})", "value exceeds maximum total digits 18",
-                            digit_count
+                            "{} (got {})",
+                            "value exceeds maximum total digits 18", digit_count
                         ),
                     });
                 }
@@ -2735,9 +2607,7 @@ impl TryFrom<String> for Number {
 impl Number {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2769,21 +2639,19 @@ impl TryFrom<String> for PercentageRate {
         {
             let value: &str = &value;
             {
-                let frac_count = value
-                    .find('.')
-                    .map_or(
-                        0,
-                        |dot| {
-                            value[dot + 1..].chars().filter(char::is_ascii_digit).count()
-                        },
-                    );
+                let frac_count = value.find('.').map_or(0, |dot| {
+                    value[dot + 1..]
+                        .chars()
+                        .filter(char::is_ascii_digit)
+                        .count()
+                });
                 let violated = frac_count > 10usize;
                 if violated {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::FractionDigits,
                         message: format!(
-                            "{} (got {})", "value exceeds maximum fraction digits 10",
-                            frac_count
+                            "{} (got {})",
+                            "value exceeds maximum fraction digits 10", frac_count
                         ),
                     });
                 }
@@ -2795,8 +2663,8 @@ impl TryFrom<String> for PercentageRate {
                     return Err(crate::common::validate::ConstraintError {
                         kind: crate::common::validate::ConstraintKind::TotalDigits,
                         message: format!(
-                            "{} (got {})", "value exceeds maximum total digits 11",
-                            digit_count
+                            "{} (got {})",
+                            "value exceeds maximum total digits 11", digit_count
                         ),
                     });
                 }
@@ -2808,9 +2676,7 @@ impl TryFrom<String> for PercentageRate {
 impl PercentageRate {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -2874,8 +2740,11 @@ impl TryFrom<String> for PhoneNumber {
                             };
                             while pos < limit {
                                 let b = bytes[pos];
-                                if !(48u8..=57u8).contains(&b) && b != 40u8 && b != 41u8
-                                    && b != 43u8 && b != 45u8
+                                if !(48u8..=57u8).contains(&b)
+                                    && b != 40u8
+                                    && b != 41u8
+                                    && b != 43u8
+                                    && b != 45u8
                                 {
                                     break;
                                 }
@@ -2908,9 +2777,7 @@ impl TryFrom<String> for PhoneNumber {
 impl PhoneNumber {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -3050,7 +2917,8 @@ impl TryFrom<String> for UUIDv4Identifier {
                         || ({
                             let b = bytes[7usize];
                             !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                        }) || bytes[8usize] != 45u8
+                        })
+                        || bytes[8usize] != 45u8
                         || ({
                             let b = bytes[9usize];
                             !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
@@ -3066,7 +2934,9 @@ impl TryFrom<String> for UUIDv4Identifier {
                         || ({
                             let b = bytes[12usize];
                             !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                        }) || bytes[13usize] != 45u8 || bytes[14usize] != 52u8
+                        })
+                        || bytes[13usize] != 45u8
+                        || bytes[14usize] != 52u8
                         || ({
                             let b = bytes[15usize];
                             !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
@@ -3078,7 +2948,8 @@ impl TryFrom<String> for UUIDv4Identifier {
                         || ({
                             let b = bytes[17usize];
                             !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                        }) || bytes[18usize] != 45u8
+                        })
+                        || bytes[18usize] != 45u8
                         || ({
                             let b = bytes[19usize];
                             b != 56u8 && b != 57u8 && b != 97u8 && b != 98u8
@@ -3094,7 +2965,8 @@ impl TryFrom<String> for UUIDv4Identifier {
                         || ({
                             let b = bytes[22usize];
                             !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                        }) || bytes[23usize] != 45u8
+                        })
+                        || bytes[23usize] != 45u8
                         || ({
                             let b = bytes[24usize];
                             !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
@@ -3159,9 +3031,7 @@ impl TryFrom<String> for UUIDv4Identifier {
 impl UUIDv4Identifier {
     /// Construct a validated instance, checking all XSD constraints.
     #[allow(clippy::unreadable_literal)]
-    pub fn new(
-        value: impl Into<String>,
-    ) -> Result<Self, crate::common::validate::ConstraintError> {
+    pub fn new(value: impl Into<String>) -> Result<Self, crate::common::validate::ConstraintError> {
         Self::try_from(value.into())
     }
 }
@@ -3254,18 +3124,13 @@ pub struct AmendmentInformationDetails14Builder {
     orgnl_dbtr_agt_acct: ::std::option::Option<CashAccount40>,
     orgnl_fnl_colltn_dt: ::std::option::Option<ISODate>,
     orgnl_frqcy: ::std::option::Option<crate::common::ChoiceWrapper<Frequency36Choice>>,
-    orgnl_rsn: ::std::option::Option<
-        crate::common::ChoiceWrapper<MandateSetupReason1Choice>,
-    >,
+    orgnl_rsn: ::std::option::Option<crate::common::ChoiceWrapper<MandateSetupReason1Choice>>,
     orgnl_trckg_days: ::std::option::Option<Exact2NumericText>,
 }
 impl AmendmentInformationDetails14Builder {
     /// Set the `orgnl_mndt_id` field.
     #[must_use]
-    pub fn orgnl_mndt_id(
-        mut self,
-        value: Max35Text,
-    ) -> AmendmentInformationDetails14Builder {
+    pub fn orgnl_mndt_id(mut self, value: Max35Text) -> AmendmentInformationDetails14Builder {
         self.orgnl_mndt_id = ::std::option::Option::Some(value);
         self
     }
@@ -3307,10 +3172,7 @@ impl AmendmentInformationDetails14Builder {
     }
     /// Set the `orgnl_dbtr_acct` field.
     #[must_use]
-    pub fn orgnl_dbtr_acct(
-        mut self,
-        value: CashAccount40,
-    ) -> AmendmentInformationDetails14Builder {
+    pub fn orgnl_dbtr_acct(mut self, value: CashAccount40) -> AmendmentInformationDetails14Builder {
         self.orgnl_dbtr_acct = ::std::option::Option::Some(value);
         self
     }
@@ -3334,10 +3196,7 @@ impl AmendmentInformationDetails14Builder {
     }
     /// Set the `orgnl_fnl_colltn_dt` field.
     #[must_use]
-    pub fn orgnl_fnl_colltn_dt(
-        mut self,
-        value: ISODate,
-    ) -> AmendmentInformationDetails14Builder {
+    pub fn orgnl_fnl_colltn_dt(mut self, value: ISODate) -> AmendmentInformationDetails14Builder {
         self.orgnl_fnl_colltn_dt = ::std::option::Option::Some(value);
         self
     }
@@ -3381,10 +3240,7 @@ impl AmendmentInformationDetails14Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        AmendmentInformationDetails14,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<AmendmentInformationDetails14, crate::common::BuilderError> {
         ::std::result::Result::Ok(AmendmentInformationDetails14 {
             orgnl_mndt_id: self.orgnl_mndt_id,
             orgnl_cdtr_schme_id: self.orgnl_cdtr_schme_id,
@@ -3550,9 +3406,7 @@ impl BranchData3Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<BranchData3, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<BranchData3, crate::common::BuilderError> {
         ::std::result::Result::Ok(BranchData3 {
             id: self.id,
             lei: self.lei,
@@ -3590,9 +3444,7 @@ pub struct CashAccount40 {
 #[allow(clippy::struct_field_names)]
 #[derive(Default)]
 pub struct CashAccount40Builder {
-    id: ::std::option::Option<
-        crate::common::ChoiceWrapper<AccountIdentification4Choice>,
-    >,
+    id: ::std::option::Option<crate::common::ChoiceWrapper<AccountIdentification4Choice>>,
     tp: ::std::option::Option<crate::common::ChoiceWrapper<CashAccountType2Choice>>,
     ccy: ::std::option::Option<ActiveOrHistoricCurrencyCode>,
     nm: ::std::option::Option<Max70Text>,
@@ -3646,9 +3498,7 @@ impl CashAccount40Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<CashAccount40, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<CashAccount40, crate::common::BuilderError> {
         ::std::result::Result::Ok(CashAccount40 {
             id: self.id,
             tp: self.tp,
@@ -3704,10 +3554,7 @@ impl Charges7Builder {
     }
     /// Set the `agt` field.
     #[must_use]
-    pub fn agt(
-        mut self,
-        value: BranchAndFinancialInstitutionIdentification6,
-    ) -> Charges7Builder {
+    pub fn agt(mut self, value: BranchAndFinancialInstitutionIdentification6) -> Charges7Builder {
         self.agt = ::std::option::Option::Some(value);
         self
     }
@@ -3769,9 +3616,7 @@ pub enum ClearingSystemIdentification3Choice {
 pub struct ClearingSystemMemberIdentification2 {
     #[serde(rename = "ClrSysId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub clr_sys_id: Option<
-        crate::common::ChoiceWrapper<ClearingSystemIdentification2Choice>,
-    >,
+    pub clr_sys_id: Option<crate::common::ChoiceWrapper<ClearingSystemIdentification2Choice>>,
     #[serde(rename = "MmbId")]
     pub mmb_id: Max35Text,
 }
@@ -3779,9 +3624,8 @@ pub struct ClearingSystemMemberIdentification2 {
 #[allow(clippy::struct_field_names)]
 #[derive(Default)]
 pub struct ClearingSystemMemberIdentification2Builder {
-    clr_sys_id: ::std::option::Option<
-        crate::common::ChoiceWrapper<ClearingSystemIdentification2Choice>,
-    >,
+    clr_sys_id:
+        ::std::option::Option<crate::common::ChoiceWrapper<ClearingSystemIdentification2Choice>>,
     mmb_id: ::std::option::Option<Max35Text>,
 }
 impl ClearingSystemMemberIdentification2Builder {
@@ -3796,10 +3640,7 @@ impl ClearingSystemMemberIdentification2Builder {
     }
     /// Set the `mmb_id` field.
     #[must_use]
-    pub fn mmb_id(
-        mut self,
-        value: Max35Text,
-    ) -> ClearingSystemMemberIdentification2Builder {
+    pub fn mmb_id(mut self, value: Max35Text) -> ClearingSystemMemberIdentification2Builder {
         self.mmb_id = ::std::option::Option::Some(value);
         self
     }
@@ -3816,10 +3657,8 @@ impl ClearingSystemMemberIdentification2Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        ClearingSystemMemberIdentification2,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<ClearingSystemMemberIdentification2, crate::common::BuilderError>
+    {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.mmb_id.is_none() {
             missing.push("mmb_id".to_owned());
@@ -4067,10 +3906,7 @@ impl CreditTransferMandateData1Builder {
     }
     /// Set the `tp` field.
     #[must_use]
-    pub fn tp(
-        mut self,
-        value: MandateTypeInformation2,
-    ) -> CreditTransferMandateData1Builder {
+    pub fn tp(mut self, value: MandateTypeInformation2) -> CreditTransferMandateData1Builder {
         self.tp = ::std::option::Option::Some(value);
         self
     }
@@ -4082,19 +3918,13 @@ impl CreditTransferMandateData1Builder {
     }
     /// Set the `dt_of_vrfctn` field.
     #[must_use]
-    pub fn dt_of_vrfctn(
-        mut self,
-        value: ISODateTime,
-    ) -> CreditTransferMandateData1Builder {
+    pub fn dt_of_vrfctn(mut self, value: ISODateTime) -> CreditTransferMandateData1Builder {
         self.dt_of_vrfctn = ::std::option::Option::Some(value);
         self
     }
     /// Set the `elctrnc_sgntr` field.
     #[must_use]
-    pub fn elctrnc_sgntr(
-        mut self,
-        value: Max10KBinary,
-    ) -> CreditTransferMandateData1Builder {
+    pub fn elctrnc_sgntr(mut self, value: Max10KBinary) -> CreditTransferMandateData1Builder {
         self.elctrnc_sgntr = ::std::option::Option::Some(value);
         self
     }
@@ -4181,10 +4011,7 @@ pub struct CreditorReferenceInformation2Builder {
 impl CreditorReferenceInformation2Builder {
     /// Set the `tp` field.
     #[must_use]
-    pub fn tp(
-        mut self,
-        value: CreditorReferenceType2,
-    ) -> CreditorReferenceInformation2Builder {
+    pub fn tp(mut self, value: CreditorReferenceType2) -> CreditorReferenceInformation2Builder {
         self.tp = ::std::option::Option::Some(value);
         self
     }
@@ -4207,10 +4034,7 @@ impl CreditorReferenceInformation2Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        CreditorReferenceInformation2,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<CreditorReferenceInformation2, crate::common::BuilderError> {
         ::std::result::Result::Ok(CreditorReferenceInformation2 {
             tp: self.tp,
             r#ref: self.r#ref,
@@ -4244,9 +4068,7 @@ pub struct CreditorReferenceType2 {
 #[allow(clippy::struct_field_names)]
 #[derive(Default)]
 pub struct CreditorReferenceType2Builder {
-    cd_or_prtry: ::std::option::Option<
-        crate::common::ChoiceWrapper<CreditorReferenceType1Choice>,
-    >,
+    cd_or_prtry: ::std::option::Option<crate::common::ChoiceWrapper<CreditorReferenceType1Choice>>,
     issr: ::std::option::Option<Max35Text>,
 }
 impl CreditorReferenceType2Builder {
@@ -4367,9 +4189,7 @@ impl DateAndPlaceOfBirth1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<DateAndPlaceOfBirth1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<DateAndPlaceOfBirth1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.birth_dt.is_none() {
             missing.push("birth_dt".to_owned());
@@ -4439,9 +4259,7 @@ impl DatePeriod2Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<DatePeriod2, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<DatePeriod2, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.fr_dt.is_none() {
             missing.push("fr_dt".to_owned());
@@ -4561,10 +4379,7 @@ pub struct DocumentBuilder {
 impl DocumentBuilder {
     /// Set the `fi_to_fi_pmt_sts_rpt` field.
     #[must_use]
-    pub fn fi_to_fi_pmt_sts_rpt(
-        mut self,
-        value: FIToFIPaymentStatusReportV12,
-    ) -> DocumentBuilder {
+    pub fn fi_to_fi_pmt_sts_rpt(mut self, value: FIToFIPaymentStatusReportV12) -> DocumentBuilder {
         self.fi_to_fi_pmt_sts_rpt = ::std::option::Option::Some(value);
         self
     }
@@ -4628,10 +4443,7 @@ pub struct DocumentAdjustment1Builder {
 impl DocumentAdjustment1Builder {
     /// Set the `amt` field.
     #[must_use]
-    pub fn amt(
-        mut self,
-        value: ActiveOrHistoricCurrencyAndAmount,
-    ) -> DocumentAdjustment1Builder {
+    pub fn amt(mut self, value: ActiveOrHistoricCurrencyAndAmount) -> DocumentAdjustment1Builder {
         self.amt = ::std::option::Option::Some(value);
         self
     }
@@ -4664,9 +4476,7 @@ impl DocumentAdjustment1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<DocumentAdjustment1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<DocumentAdjustment1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.amt.is_none() {
             missing.push("amt".to_owned());
@@ -4744,10 +4554,7 @@ impl DocumentLineIdentification1Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        DocumentLineIdentification1,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<DocumentLineIdentification1, crate::common::BuilderError> {
         ::std::result::Result::Ok(DocumentLineIdentification1 {
             tp: self.tp,
             nb: self.nb,
@@ -4795,10 +4602,7 @@ impl DocumentLineInformation1Builder {
     }
     /// Append one item to the `id` field.
     #[must_use]
-    pub fn add_id(
-        mut self,
-        value: DocumentLineIdentification1,
-    ) -> DocumentLineInformation1Builder {
+    pub fn add_id(mut self, value: DocumentLineIdentification1) -> DocumentLineInformation1Builder {
         self.id.push(value);
         self
     }
@@ -4854,9 +4658,7 @@ pub struct DocumentLineType1 {
 #[allow(clippy::struct_field_names)]
 #[derive(Default)]
 pub struct DocumentLineType1Builder {
-    cd_or_prtry: ::std::option::Option<
-        crate::common::ChoiceWrapper<DocumentLineType1Choice>,
-    >,
+    cd_or_prtry: ::std::option::Option<crate::common::ChoiceWrapper<DocumentLineType1Choice>>,
     issr: ::std::option::Option<Max35Text>,
 }
 impl DocumentLineType1Builder {
@@ -4886,9 +4688,7 @@ impl DocumentLineType1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<DocumentLineType1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<DocumentLineType1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.cd_or_prtry.is_none() {
             missing.push("cd_or_prtry".to_owned());
@@ -4937,19 +4737,13 @@ pub struct EquivalentAmount2Builder {
 impl EquivalentAmount2Builder {
     /// Set the `amt` field.
     #[must_use]
-    pub fn amt(
-        mut self,
-        value: ActiveOrHistoricCurrencyAndAmount,
-    ) -> EquivalentAmount2Builder {
+    pub fn amt(mut self, value: ActiveOrHistoricCurrencyAndAmount) -> EquivalentAmount2Builder {
         self.amt = ::std::option::Option::Some(value);
         self
     }
     /// Set the `ccy_of_trf` field.
     #[must_use]
-    pub fn ccy_of_trf(
-        mut self,
-        value: ActiveOrHistoricCurrencyCode,
-    ) -> EquivalentAmount2Builder {
+    pub fn ccy_of_trf(mut self, value: ActiveOrHistoricCurrencyCode) -> EquivalentAmount2Builder {
         self.ccy_of_trf = ::std::option::Option::Some(value);
         self
     }
@@ -4964,9 +4758,7 @@ impl EquivalentAmount2Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<EquivalentAmount2, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<EquivalentAmount2, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.amt.is_none() {
             missing.push("amt".to_owned());
@@ -5022,10 +4814,7 @@ pub struct FIToFIPaymentStatusReportV12Builder {
 impl FIToFIPaymentStatusReportV12Builder {
     /// Set the `grp_hdr` field.
     #[must_use]
-    pub fn grp_hdr(
-        mut self,
-        value: GroupHeader101,
-    ) -> FIToFIPaymentStatusReportV12Builder {
+    pub fn grp_hdr(mut self, value: GroupHeader101) -> FIToFIPaymentStatusReportV12Builder {
         self.grp_hdr = ::std::option::Option::Some(value);
         self
     }
@@ -5096,10 +4885,7 @@ impl FIToFIPaymentStatusReportV12Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        FIToFIPaymentStatusReportV12,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<FIToFIPaymentStatusReportV12, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.grp_hdr.is_none() {
             missing.push("grp_hdr".to_owned());
@@ -5186,19 +4972,13 @@ impl FinancialInstitutionIdentification18Builder {
     }
     /// Set the `lei` field.
     #[must_use]
-    pub fn lei(
-        mut self,
-        value: LEIIdentifier,
-    ) -> FinancialInstitutionIdentification18Builder {
+    pub fn lei(mut self, value: LEIIdentifier) -> FinancialInstitutionIdentification18Builder {
         self.lei = ::std::option::Option::Some(value);
         self
     }
     /// Set the `nm` field.
     #[must_use]
-    pub fn nm(
-        mut self,
-        value: Max140Text,
-    ) -> FinancialInstitutionIdentification18Builder {
+    pub fn nm(mut self, value: Max140Text) -> FinancialInstitutionIdentification18Builder {
         self.nm = ::std::option::Option::Some(value);
         self
     }
@@ -5233,10 +5013,8 @@ impl FinancialInstitutionIdentification18Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        FinancialInstitutionIdentification18,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<FinancialInstitutionIdentification18, crate::common::BuilderError>
+    {
         ::std::result::Result::Ok(FinancialInstitutionIdentification18 {
             bicfi: self.bicfi,
             clr_sys_mmb_id: self.clr_sys_mmb_id,
@@ -5302,9 +5080,7 @@ impl FrequencyAndMoment1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<FrequencyAndMoment1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<FrequencyAndMoment1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.tp.is_none() {
             missing.push("tp".to_owned());
@@ -5369,9 +5145,7 @@ impl FrequencyPeriod1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<FrequencyPeriod1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<FrequencyPeriod1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.tp.is_none() {
             missing.push("tp".to_owned());
@@ -5452,10 +5226,7 @@ impl Garnishment3Builder {
     }
     /// Set the `grnshmt_admstr` field.
     #[must_use]
-    pub fn grnshmt_admstr(
-        mut self,
-        value: PartyIdentification135,
-    ) -> Garnishment3Builder {
+    pub fn grnshmt_admstr(mut self, value: PartyIdentification135) -> Garnishment3Builder {
         self.grnshmt_admstr = ::std::option::Option::Some(value);
         self
     }
@@ -5473,28 +5244,19 @@ impl Garnishment3Builder {
     }
     /// Set the `rmtd_amt` field.
     #[must_use]
-    pub fn rmtd_amt(
-        mut self,
-        value: ActiveOrHistoricCurrencyAndAmount,
-    ) -> Garnishment3Builder {
+    pub fn rmtd_amt(mut self, value: ActiveOrHistoricCurrencyAndAmount) -> Garnishment3Builder {
         self.rmtd_amt = ::std::option::Option::Some(value);
         self
     }
     /// Set the `fmly_mdcl_insrnc_ind` field.
     #[must_use]
-    pub fn fmly_mdcl_insrnc_ind(
-        mut self,
-        value: TrueFalseIndicator,
-    ) -> Garnishment3Builder {
+    pub fn fmly_mdcl_insrnc_ind(mut self, value: TrueFalseIndicator) -> Garnishment3Builder {
         self.fmly_mdcl_insrnc_ind = ::std::option::Option::Some(value);
         self
     }
     /// Set the `mplyee_termntn_ind` field.
     #[must_use]
-    pub fn mplyee_termntn_ind(
-        mut self,
-        value: TrueFalseIndicator,
-    ) -> Garnishment3Builder {
+    pub fn mplyee_termntn_ind(mut self, value: TrueFalseIndicator) -> Garnishment3Builder {
         self.mplyee_termntn_ind = ::std::option::Option::Some(value);
         self
     }
@@ -5509,9 +5271,7 @@ impl Garnishment3Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<Garnishment3, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<Garnishment3, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.tp.is_none() {
             missing.push("tp".to_owned());
@@ -5553,9 +5313,7 @@ pub struct GarnishmentType1 {
 #[allow(clippy::struct_field_names)]
 #[derive(Default)]
 pub struct GarnishmentType1Builder {
-    cd_or_prtry: ::std::option::Option<
-        crate::common::ChoiceWrapper<GarnishmentType1Choice>,
-    >,
+    cd_or_prtry: ::std::option::Option<crate::common::ChoiceWrapper<GarnishmentType1Choice>>,
     issr: ::std::option::Option<Max35Text>,
 }
 impl GarnishmentType1Builder {
@@ -5585,9 +5343,7 @@ impl GarnishmentType1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<GarnishmentType1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<GarnishmentType1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.cd_or_prtry.is_none() {
             missing.push("cd_or_prtry".to_owned());
@@ -5635,9 +5391,7 @@ pub struct GenericAccountIdentification1 {
 #[derive(Default)]
 pub struct GenericAccountIdentification1Builder {
     id: ::std::option::Option<Max34Text>,
-    schme_nm: ::std::option::Option<
-        crate::common::ChoiceWrapper<AccountSchemeName1Choice>,
-    >,
+    schme_nm: ::std::option::Option<crate::common::ChoiceWrapper<AccountSchemeName1Choice>>,
     issr: ::std::option::Option<Max35Text>,
 }
 impl GenericAccountIdentification1Builder {
@@ -5675,10 +5429,7 @@ impl GenericAccountIdentification1Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        GenericAccountIdentification1,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<GenericAccountIdentification1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.id.is_none() {
             missing.push("id".to_owned());
@@ -5709,9 +5460,7 @@ pub struct GenericFinancialIdentification1 {
     pub id: Max35Text,
     #[serde(rename = "SchmeNm")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub schme_nm: Option<
-        crate::common::ChoiceWrapper<FinancialIdentificationSchemeName1Choice>,
-    >,
+    pub schme_nm: Option<crate::common::ChoiceWrapper<FinancialIdentificationSchemeName1Choice>>,
     #[serde(rename = "Issr")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub issr: Option<Max35Text>,
@@ -5761,10 +5510,7 @@ impl GenericFinancialIdentification1Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        GenericFinancialIdentification1,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<GenericFinancialIdentification1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.id.is_none() {
             missing.push("id".to_owned());
@@ -5810,10 +5556,7 @@ pub struct GenericIdentification30Builder {
 impl GenericIdentification30Builder {
     /// Set the `id` field.
     #[must_use]
-    pub fn id(
-        mut self,
-        value: Exact4AlphaNumericText,
-    ) -> GenericIdentification30Builder {
+    pub fn id(mut self, value: Exact4AlphaNumericText) -> GenericIdentification30Builder {
         self.id = ::std::option::Option::Some(value);
         self
     }
@@ -5876,9 +5619,7 @@ pub struct GenericOrganisationIdentification1 {
     pub id: Max35Text,
     #[serde(rename = "SchmeNm")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub schme_nm: Option<
-        crate::common::ChoiceWrapper<OrganisationIdentificationSchemeName1Choice>,
-    >,
+    pub schme_nm: Option<crate::common::ChoiceWrapper<OrganisationIdentificationSchemeName1Choice>>,
     #[serde(rename = "Issr")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub issr: Option<Max35Text>,
@@ -5911,10 +5652,7 @@ impl GenericOrganisationIdentification1Builder {
     }
     /// Set the `issr` field.
     #[must_use]
-    pub fn issr(
-        mut self,
-        value: Max35Text,
-    ) -> GenericOrganisationIdentification1Builder {
+    pub fn issr(mut self, value: Max35Text) -> GenericOrganisationIdentification1Builder {
         self.issr = ::std::option::Option::Some(value);
         self
     }
@@ -5931,10 +5669,8 @@ impl GenericOrganisationIdentification1Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        GenericOrganisationIdentification1,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<GenericOrganisationIdentification1, crate::common::BuilderError>
+    {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.id.is_none() {
             missing.push("id".to_owned());
@@ -5965,9 +5701,7 @@ pub struct GenericPersonIdentification1 {
     pub id: Max35Text,
     #[serde(rename = "SchmeNm")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub schme_nm: Option<
-        crate::common::ChoiceWrapper<PersonIdentificationSchemeName1Choice>,
-    >,
+    pub schme_nm: Option<crate::common::ChoiceWrapper<PersonIdentificationSchemeName1Choice>>,
     #[serde(rename = "Issr")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub issr: Option<Max35Text>,
@@ -5977,9 +5711,8 @@ pub struct GenericPersonIdentification1 {
 #[derive(Default)]
 pub struct GenericPersonIdentification1Builder {
     id: ::std::option::Option<Max35Text>,
-    schme_nm: ::std::option::Option<
-        crate::common::ChoiceWrapper<PersonIdentificationSchemeName1Choice>,
-    >,
+    schme_nm:
+        ::std::option::Option<crate::common::ChoiceWrapper<PersonIdentificationSchemeName1Choice>>,
     issr: ::std::option::Option<Max35Text>,
 }
 impl GenericPersonIdentification1Builder {
@@ -6017,10 +5750,7 @@ impl GenericPersonIdentification1Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        GenericPersonIdentification1,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<GenericPersonIdentification1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.id.is_none() {
             missing.push("id".to_owned());
@@ -6104,10 +5834,7 @@ impl GroupHeader101Builder {
     }
     /// Set the `orgnl_biz_qry` field.
     #[must_use]
-    pub fn orgnl_biz_qry(
-        mut self,
-        value: OriginalBusinessQuery1,
-    ) -> GroupHeader101Builder {
+    pub fn orgnl_biz_qry(mut self, value: OriginalBusinessQuery1) -> GroupHeader101Builder {
         self.orgnl_biz_qry = ::std::option::Option::Some(value);
         self
     }
@@ -6122,9 +5849,7 @@ impl GroupHeader101Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<GroupHeader101, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<GroupHeader101, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.msg_id.is_none() {
             missing.push("msg_id".to_owned());
@@ -6241,10 +5966,7 @@ impl MandateRelatedInformation15Builder {
     }
     /// Set the `amdmnt_ind` field.
     #[must_use]
-    pub fn amdmnt_ind(
-        mut self,
-        value: TrueFalseIndicator,
-    ) -> MandateRelatedInformation15Builder {
+    pub fn amdmnt_ind(mut self, value: TrueFalseIndicator) -> MandateRelatedInformation15Builder {
         self.amdmnt_ind = ::std::option::Option::Some(value);
         self
     }
@@ -6259,28 +5981,19 @@ impl MandateRelatedInformation15Builder {
     }
     /// Set the `elctrnc_sgntr` field.
     #[must_use]
-    pub fn elctrnc_sgntr(
-        mut self,
-        value: Max1025Text,
-    ) -> MandateRelatedInformation15Builder {
+    pub fn elctrnc_sgntr(mut self, value: Max1025Text) -> MandateRelatedInformation15Builder {
         self.elctrnc_sgntr = ::std::option::Option::Some(value);
         self
     }
     /// Set the `frst_colltn_dt` field.
     #[must_use]
-    pub fn frst_colltn_dt(
-        mut self,
-        value: ISODate,
-    ) -> MandateRelatedInformation15Builder {
+    pub fn frst_colltn_dt(mut self, value: ISODate) -> MandateRelatedInformation15Builder {
         self.frst_colltn_dt = ::std::option::Option::Some(value);
         self
     }
     /// Set the `fnl_colltn_dt` field.
     #[must_use]
-    pub fn fnl_colltn_dt(
-        mut self,
-        value: ISODate,
-    ) -> MandateRelatedInformation15Builder {
+    pub fn fnl_colltn_dt(mut self, value: ISODate) -> MandateRelatedInformation15Builder {
         self.fnl_colltn_dt = ::std::option::Option::Some(value);
         self
     }
@@ -6304,10 +6017,7 @@ impl MandateRelatedInformation15Builder {
     }
     /// Set the `trckg_days` field.
     #[must_use]
-    pub fn trckg_days(
-        mut self,
-        value: Exact2NumericText,
-    ) -> MandateRelatedInformation15Builder {
+    pub fn trckg_days(mut self, value: Exact2NumericText) -> MandateRelatedInformation15Builder {
         self.trckg_days = ::std::option::Option::Some(value);
         self
     }
@@ -6324,10 +6034,7 @@ impl MandateRelatedInformation15Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        MandateRelatedInformation15,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<MandateRelatedInformation15, crate::common::BuilderError> {
         ::std::result::Result::Ok(MandateRelatedInformation15 {
             mndt_id: self.mndt_id,
             dt_of_sgntr: self.dt_of_sgntr,
@@ -6377,15 +6084,9 @@ pub struct MandateTypeInformation2 {
 #[derive(Default)]
 pub struct MandateTypeInformation2Builder {
     svc_lvl: ::std::option::Option<crate::common::ChoiceWrapper<ServiceLevel8Choice>>,
-    lcl_instrm: ::std::option::Option<
-        crate::common::ChoiceWrapper<LocalInstrument2Choice>,
-    >,
-    ctgy_purp: ::std::option::Option<
-        crate::common::ChoiceWrapper<CategoryPurpose1Choice>,
-    >,
-    clssfctn: ::std::option::Option<
-        crate::common::ChoiceWrapper<MandateClassification1Choice>,
-    >,
+    lcl_instrm: ::std::option::Option<crate::common::ChoiceWrapper<LocalInstrument2Choice>>,
+    ctgy_purp: ::std::option::Option<crate::common::ChoiceWrapper<CategoryPurpose1Choice>>,
+    clssfctn: ::std::option::Option<crate::common::ChoiceWrapper<MandateClassification1Choice>>,
 }
 impl MandateTypeInformation2Builder {
     /// Set the `svc_lvl` field.
@@ -6492,10 +6193,7 @@ impl NumberOfTransactionsPerStatus5Builder {
     }
     /// Set the `dtld_ctrl_sum` field.
     #[must_use]
-    pub fn dtld_ctrl_sum(
-        mut self,
-        value: DecimalNumber,
-    ) -> NumberOfTransactionsPerStatus5Builder {
+    pub fn dtld_ctrl_sum(mut self, value: DecimalNumber) -> NumberOfTransactionsPerStatus5Builder {
         self.dtld_ctrl_sum = ::std::option::Option::Some(value);
         self
     }
@@ -6512,10 +6210,7 @@ impl NumberOfTransactionsPerStatus5Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        NumberOfTransactionsPerStatus5,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<NumberOfTransactionsPerStatus5, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.dtld_nb_of_txs.is_none() {
             missing.push("dtld_nb_of_txs".to_owned());
@@ -6611,10 +6306,7 @@ impl OrganisationIdentification29Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        OrganisationIdentification29,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<OrganisationIdentification29, crate::common::BuilderError> {
         ::std::result::Result::Ok(OrganisationIdentification29 {
             any_bic: self.any_bic,
             lei: self.lei,
@@ -6768,28 +6460,19 @@ impl OriginalGroupHeader17Builder {
     }
     /// Set the `orgnl_cre_dt_tm` field.
     #[must_use]
-    pub fn orgnl_cre_dt_tm(
-        mut self,
-        value: ISODateTime,
-    ) -> OriginalGroupHeader17Builder {
+    pub fn orgnl_cre_dt_tm(mut self, value: ISODateTime) -> OriginalGroupHeader17Builder {
         self.orgnl_cre_dt_tm = ::std::option::Option::Some(value);
         self
     }
     /// Set the `orgnl_nb_of_txs` field.
     #[must_use]
-    pub fn orgnl_nb_of_txs(
-        mut self,
-        value: Max15NumericText,
-    ) -> OriginalGroupHeader17Builder {
+    pub fn orgnl_nb_of_txs(mut self, value: Max15NumericText) -> OriginalGroupHeader17Builder {
         self.orgnl_nb_of_txs = ::std::option::Option::Some(value);
         self
     }
     /// Set the `orgnl_ctrl_sum` field.
     #[must_use]
-    pub fn orgnl_ctrl_sum(
-        mut self,
-        value: DecimalNumber,
-    ) -> OriginalGroupHeader17Builder {
+    pub fn orgnl_ctrl_sum(mut self, value: DecimalNumber) -> OriginalGroupHeader17Builder {
         self.orgnl_ctrl_sum = ::std::option::Option::Some(value);
         self
     }
@@ -6905,28 +6588,19 @@ pub struct OriginalGroupInformation29Builder {
 impl OriginalGroupInformation29Builder {
     /// Set the `orgnl_msg_id` field.
     #[must_use]
-    pub fn orgnl_msg_id(
-        mut self,
-        value: Max35Text,
-    ) -> OriginalGroupInformation29Builder {
+    pub fn orgnl_msg_id(mut self, value: Max35Text) -> OriginalGroupInformation29Builder {
         self.orgnl_msg_id = ::std::option::Option::Some(value);
         self
     }
     /// Set the `orgnl_msg_nm_id` field.
     #[must_use]
-    pub fn orgnl_msg_nm_id(
-        mut self,
-        value: Max35Text,
-    ) -> OriginalGroupInformation29Builder {
+    pub fn orgnl_msg_nm_id(mut self, value: Max35Text) -> OriginalGroupInformation29Builder {
         self.orgnl_msg_nm_id = ::std::option::Option::Some(value);
         self
     }
     /// Set the `orgnl_cre_dt_tm` field.
     #[must_use]
-    pub fn orgnl_cre_dt_tm(
-        mut self,
-        value: ISODateTime,
-    ) -> OriginalGroupInformation29Builder {
+    pub fn orgnl_cre_dt_tm(mut self, value: ISODateTime) -> OriginalGroupInformation29Builder {
         self.orgnl_cre_dt_tm = ::std::option::Option::Some(value);
         self
     }
@@ -7048,16 +6722,12 @@ pub struct OriginalTransactionReference35Builder {
     amt: ::std::option::Option<crate::common::ChoiceWrapper<AmountType4Choice>>,
     intr_bk_sttlm_dt: ::std::option::Option<ISODate>,
     reqd_colltn_dt: ::std::option::Option<ISODate>,
-    reqd_exctn_dt: ::std::option::Option<
-        crate::common::ChoiceWrapper<DateAndDateTime2Choice>,
-    >,
+    reqd_exctn_dt: ::std::option::Option<crate::common::ChoiceWrapper<DateAndDateTime2Choice>>,
     cdtr_schme_id: ::std::option::Option<PartyIdentification135>,
     sttlm_inf: ::std::option::Option<SettlementInstruction11>,
     pmt_tp_inf: ::std::option::Option<PaymentTypeInformation27>,
     pmt_mtd: ::std::option::Option<PaymentMethod4Code>,
-    mndt_rltd_inf: ::std::option::Option<
-        crate::common::ChoiceWrapper<MandateRelatedData2Choice>,
-    >,
+    mndt_rltd_inf: ::std::option::Option<crate::common::ChoiceWrapper<MandateRelatedData2Choice>>,
     rmt_inf: ::std::option::Option<RemittanceInformation21>,
     ultmt_dbtr: ::std::option::Option<crate::common::ChoiceWrapper<Party40Choice>>,
     dbtr: ::std::option::Option<crate::common::ChoiceWrapper<Party40Choice>>,
@@ -7092,19 +6762,13 @@ impl OriginalTransactionReference35Builder {
     }
     /// Set the `intr_bk_sttlm_dt` field.
     #[must_use]
-    pub fn intr_bk_sttlm_dt(
-        mut self,
-        value: ISODate,
-    ) -> OriginalTransactionReference35Builder {
+    pub fn intr_bk_sttlm_dt(mut self, value: ISODate) -> OriginalTransactionReference35Builder {
         self.intr_bk_sttlm_dt = ::std::option::Option::Some(value);
         self
     }
     /// Set the `reqd_colltn_dt` field.
     #[must_use]
-    pub fn reqd_colltn_dt(
-        mut self,
-        value: ISODate,
-    ) -> OriginalTransactionReference35Builder {
+    pub fn reqd_colltn_dt(mut self, value: ISODate) -> OriginalTransactionReference35Builder {
         self.reqd_colltn_dt = ::std::option::Option::Some(value);
         self
     }
@@ -7146,10 +6810,7 @@ impl OriginalTransactionReference35Builder {
     }
     /// Set the `pmt_mtd` field.
     #[must_use]
-    pub fn pmt_mtd(
-        mut self,
-        value: PaymentMethod4Code,
-    ) -> OriginalTransactionReference35Builder {
+    pub fn pmt_mtd(mut self, value: PaymentMethod4Code) -> OriginalTransactionReference35Builder {
         self.pmt_mtd = ::std::option::Option::Some(value);
         self
     }
@@ -7191,10 +6852,7 @@ impl OriginalTransactionReference35Builder {
     }
     /// Set the `dbtr_acct` field.
     #[must_use]
-    pub fn dbtr_acct(
-        mut self,
-        value: CashAccount40,
-    ) -> OriginalTransactionReference35Builder {
+    pub fn dbtr_acct(mut self, value: CashAccount40) -> OriginalTransactionReference35Builder {
         self.dbtr_acct = ::std::option::Option::Some(value);
         self
     }
@@ -7209,10 +6867,7 @@ impl OriginalTransactionReference35Builder {
     }
     /// Set the `dbtr_agt_acct` field.
     #[must_use]
-    pub fn dbtr_agt_acct(
-        mut self,
-        value: CashAccount40,
-    ) -> OriginalTransactionReference35Builder {
+    pub fn dbtr_agt_acct(mut self, value: CashAccount40) -> OriginalTransactionReference35Builder {
         self.dbtr_agt_acct = ::std::option::Option::Some(value);
         self
     }
@@ -7227,10 +6882,7 @@ impl OriginalTransactionReference35Builder {
     }
     /// Set the `cdtr_agt_acct` field.
     #[must_use]
-    pub fn cdtr_agt_acct(
-        mut self,
-        value: CashAccount40,
-    ) -> OriginalTransactionReference35Builder {
+    pub fn cdtr_agt_acct(mut self, value: CashAccount40) -> OriginalTransactionReference35Builder {
         self.cdtr_agt_acct = ::std::option::Option::Some(value);
         self
     }
@@ -7245,10 +6897,7 @@ impl OriginalTransactionReference35Builder {
     }
     /// Set the `cdtr_acct` field.
     #[must_use]
-    pub fn cdtr_acct(
-        mut self,
-        value: CashAccount40,
-    ) -> OriginalTransactionReference35Builder {
+    pub fn cdtr_acct(mut self, value: CashAccount40) -> OriginalTransactionReference35Builder {
         self.cdtr_acct = ::std::option::Option::Some(value);
         self
     }
@@ -7283,10 +6932,7 @@ impl OriginalTransactionReference35Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        OriginalTransactionReference35,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<OriginalTransactionReference35, crate::common::BuilderError> {
         ::std::result::Result::Ok(OriginalTransactionReference35 {
             intr_bk_sttlm_amt: self.intr_bk_sttlm_amt,
             amt: self.amt,
@@ -7359,9 +7005,7 @@ impl OtherContact1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<OtherContact1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<OtherContact1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.chanl_tp.is_none() {
             missing.push("chanl_tp".to_owned());
@@ -7529,9 +7173,7 @@ pub struct PaymentTransaction130 {
     pub accptnc_dt_tm: Option<ISODateTime>,
     #[serde(rename = "FctvIntrBkSttlmDt")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub fctv_intr_bk_sttlm_dt: Option<
-        crate::common::ChoiceWrapper<DateAndDateTime2Choice>,
-    >,
+    pub fctv_intr_bk_sttlm_dt: Option<crate::common::ChoiceWrapper<DateAndDateTime2Choice>>,
     #[serde(rename = "AcctSvcrRef")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub acct_svcr_ref: Option<Max35Text>,
@@ -7566,9 +7208,8 @@ pub struct PaymentTransaction130Builder {
     sts_rsn_inf: ::std::vec::Vec<StatusReasonInformation12>,
     chrgs_inf: ::std::vec::Vec<Charges7>,
     accptnc_dt_tm: ::std::option::Option<ISODateTime>,
-    fctv_intr_bk_sttlm_dt: ::std::option::Option<
-        crate::common::ChoiceWrapper<DateAndDateTime2Choice>,
-    >,
+    fctv_intr_bk_sttlm_dt:
+        ::std::option::Option<crate::common::ChoiceWrapper<DateAndDateTime2Choice>>,
     acct_svcr_ref: ::std::option::Option<Max35Text>,
     clr_sys_ref: ::std::option::Option<Max35Text>,
     instg_agt: ::std::option::Option<BranchAndFinancialInstitutionIdentification6>,
@@ -7600,10 +7241,7 @@ impl PaymentTransaction130Builder {
     }
     /// Set the `orgnl_end_to_end_id` field.
     #[must_use]
-    pub fn orgnl_end_to_end_id(
-        mut self,
-        value: Max35Text,
-    ) -> PaymentTransaction130Builder {
+    pub fn orgnl_end_to_end_id(mut self, value: Max35Text) -> PaymentTransaction130Builder {
         self.orgnl_end_to_end_id = ::std::option::Option::Some(value);
         self
     }
@@ -7615,10 +7253,7 @@ impl PaymentTransaction130Builder {
     }
     /// Set the `orgnl_uetr` field.
     #[must_use]
-    pub fn orgnl_uetr(
-        mut self,
-        value: UUIDv4Identifier,
-    ) -> PaymentTransaction130Builder {
+    pub fn orgnl_uetr(mut self, value: UUIDv4Identifier) -> PaymentTransaction130Builder {
         self.orgnl_uetr = ::std::option::Option::Some(value);
         self
     }
@@ -7651,10 +7286,7 @@ impl PaymentTransaction130Builder {
     }
     /// Set the `chrgs_inf` field (replaces any previously added items).
     #[must_use]
-    pub fn chrgs_inf(
-        mut self,
-        value: ::std::vec::Vec<Charges7>,
-    ) -> PaymentTransaction130Builder {
+    pub fn chrgs_inf(mut self, value: ::std::vec::Vec<Charges7>) -> PaymentTransaction130Builder {
         self.chrgs_inf = value;
         self
     }
@@ -7729,10 +7361,7 @@ impl PaymentTransaction130Builder {
     }
     /// Append one item to the `splmtry_data` field.
     #[must_use]
-    pub fn add_splmtry_data(
-        mut self,
-        value: SupplementaryData1,
-    ) -> PaymentTransaction130Builder {
+    pub fn add_splmtry_data(mut self, value: SupplementaryData1) -> PaymentTransaction130Builder {
         self.splmtry_data.push(value);
         self
     }
@@ -7807,30 +7436,20 @@ pub struct PaymentTypeInformation27Builder {
     instr_prty: ::std::option::Option<Priority2Code>,
     clr_chanl: ::std::option::Option<ClearingChannel2Code>,
     svc_lvl: ::std::vec::Vec<crate::common::ChoiceWrapper<ServiceLevel8Choice>>,
-    lcl_instrm: ::std::option::Option<
-        crate::common::ChoiceWrapper<LocalInstrument2Choice>,
-    >,
+    lcl_instrm: ::std::option::Option<crate::common::ChoiceWrapper<LocalInstrument2Choice>>,
     seq_tp: ::std::option::Option<SequenceType3Code>,
-    ctgy_purp: ::std::option::Option<
-        crate::common::ChoiceWrapper<CategoryPurpose1Choice>,
-    >,
+    ctgy_purp: ::std::option::Option<crate::common::ChoiceWrapper<CategoryPurpose1Choice>>,
 }
 impl PaymentTypeInformation27Builder {
     /// Set the `instr_prty` field.
     #[must_use]
-    pub fn instr_prty(
-        mut self,
-        value: Priority2Code,
-    ) -> PaymentTypeInformation27Builder {
+    pub fn instr_prty(mut self, value: Priority2Code) -> PaymentTypeInformation27Builder {
         self.instr_prty = ::std::option::Option::Some(value);
         self
     }
     /// Set the `clr_chanl` field.
     #[must_use]
-    pub fn clr_chanl(
-        mut self,
-        value: ClearingChannel2Code,
-    ) -> PaymentTypeInformation27Builder {
+    pub fn clr_chanl(mut self, value: ClearingChannel2Code) -> PaymentTypeInformation27Builder {
         self.clr_chanl = ::std::option::Option::Some(value);
         self
     }
@@ -7863,10 +7482,7 @@ impl PaymentTypeInformation27Builder {
     }
     /// Set the `seq_tp` field.
     #[must_use]
-    pub fn seq_tp(
-        mut self,
-        value: SequenceType3Code,
-    ) -> PaymentTypeInformation27Builder {
+    pub fn seq_tp(mut self, value: SequenceType3Code) -> PaymentTypeInformation27Builder {
         self.seq_tp = ::std::option::Option::Some(value);
         self
     }
@@ -8160,10 +7776,7 @@ impl PostalAddress24Builder {
     }
     /// Set the `adr_line` field (replaces any previously added items).
     #[must_use]
-    pub fn adr_line(
-        mut self,
-        value: ::std::vec::Vec<Max70Text>,
-    ) -> PostalAddress24Builder {
+    pub fn adr_line(mut self, value: ::std::vec::Vec<Max70Text>) -> PostalAddress24Builder {
         self.adr_line = value;
         self
     }
@@ -8184,9 +7797,7 @@ impl PostalAddress24Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<PostalAddress24, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<PostalAddress24, crate::common::BuilderError> {
         ::std::result::Result::Ok(PostalAddress24 {
             adr_tp: self.adr_tp,
             dept: self.dept,
@@ -8258,10 +7869,7 @@ impl ProxyAccountIdentification1Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        ProxyAccountIdentification1,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<ProxyAccountIdentification1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.id.is_none() {
             missing.push("id".to_owned());
@@ -8329,10 +7937,7 @@ pub struct ReferredDocumentInformation7Builder {
 impl ReferredDocumentInformation7Builder {
     /// Set the `tp` field.
     #[must_use]
-    pub fn tp(
-        mut self,
-        value: ReferredDocumentType4,
-    ) -> ReferredDocumentInformation7Builder {
+    pub fn tp(mut self, value: ReferredDocumentType4) -> ReferredDocumentInformation7Builder {
         self.tp = ::std::option::Option::Some(value);
         self
     }
@@ -8379,10 +7984,7 @@ impl ReferredDocumentInformation7Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        ReferredDocumentInformation7,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<ReferredDocumentInformation7, crate::common::BuilderError> {
         ::std::result::Result::Ok(ReferredDocumentInformation7 {
             tp: self.tp,
             nb: self.nb,
@@ -8418,9 +8020,7 @@ pub struct ReferredDocumentType4 {
 #[allow(clippy::struct_field_names)]
 #[derive(Default)]
 pub struct ReferredDocumentType4Builder {
-    cd_or_prtry: ::std::option::Option<
-        crate::common::ChoiceWrapper<ReferredDocumentType3Choice>,
-    >,
+    cd_or_prtry: ::std::option::Option<crate::common::ChoiceWrapper<ReferredDocumentType3Choice>>,
     issr: ::std::option::Option<Max35Text>,
 }
 impl ReferredDocumentType4Builder {
@@ -8532,10 +8132,7 @@ impl RemittanceAmount2Builder {
     }
     /// Append one item to the `dscnt_apld_amt` field.
     #[must_use]
-    pub fn add_dscnt_apld_amt(
-        mut self,
-        value: DiscountAmountAndType1,
-    ) -> RemittanceAmount2Builder {
+    pub fn add_dscnt_apld_amt(mut self, value: DiscountAmountAndType1) -> RemittanceAmount2Builder {
         self.dscnt_apld_amt.push(value);
         self
     }
@@ -8601,9 +8198,7 @@ impl RemittanceAmount2Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<RemittanceAmount2, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<RemittanceAmount2, crate::common::BuilderError> {
         ::std::result::Result::Ok(RemittanceAmount2 {
             due_pybl_amt: self.due_pybl_amt,
             dscnt_apld_amt: self.dscnt_apld_amt,
@@ -8677,10 +8272,7 @@ impl RemittanceAmount3Builder {
     }
     /// Append one item to the `dscnt_apld_amt` field.
     #[must_use]
-    pub fn add_dscnt_apld_amt(
-        mut self,
-        value: DiscountAmountAndType1,
-    ) -> RemittanceAmount3Builder {
+    pub fn add_dscnt_apld_amt(mut self, value: DiscountAmountAndType1) -> RemittanceAmount3Builder {
         self.dscnt_apld_amt.push(value);
         self
     }
@@ -8746,9 +8338,7 @@ impl RemittanceAmount3Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<RemittanceAmount3, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<RemittanceAmount3, crate::common::BuilderError> {
         ::std::result::Result::Ok(RemittanceAmount3 {
             due_pybl_amt: self.due_pybl_amt,
             dscnt_apld_amt: self.dscnt_apld_amt,
@@ -8787,10 +8377,7 @@ pub struct RemittanceInformation21Builder {
 impl RemittanceInformation21Builder {
     /// Set the `ustrd` field (replaces any previously added items).
     #[must_use]
-    pub fn ustrd(
-        mut self,
-        value: ::std::vec::Vec<Max140Text>,
-    ) -> RemittanceInformation21Builder {
+    pub fn ustrd(mut self, value: ::std::vec::Vec<Max140Text>) -> RemittanceInformation21Builder {
         self.ustrd = value;
         self
     }
@@ -8862,9 +8449,7 @@ pub struct SettlementInstruction11 {
     pub sttlm_acct: Option<CashAccount40>,
     #[serde(rename = "ClrSys")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub clr_sys: Option<
-        crate::common::ChoiceWrapper<ClearingSystemIdentification3Choice>,
-    >,
+    pub clr_sys: Option<crate::common::ChoiceWrapper<ClearingSystemIdentification3Choice>>,
     #[serde(rename = "InstgRmbrsmntAgt")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub instg_rmbrsmnt_agt: Option<BranchAndFinancialInstitutionIdentification6>,
@@ -8890,29 +8475,19 @@ pub struct SettlementInstruction11 {
 pub struct SettlementInstruction11Builder {
     sttlm_mtd: ::std::option::Option<SettlementMethod1Code>,
     sttlm_acct: ::std::option::Option<CashAccount40>,
-    clr_sys: ::std::option::Option<
-        crate::common::ChoiceWrapper<ClearingSystemIdentification3Choice>,
-    >,
-    instg_rmbrsmnt_agt: ::std::option::Option<
-        BranchAndFinancialInstitutionIdentification6,
-    >,
+    clr_sys:
+        ::std::option::Option<crate::common::ChoiceWrapper<ClearingSystemIdentification3Choice>>,
+    instg_rmbrsmnt_agt: ::std::option::Option<BranchAndFinancialInstitutionIdentification6>,
     instg_rmbrsmnt_agt_acct: ::std::option::Option<CashAccount40>,
-    instd_rmbrsmnt_agt: ::std::option::Option<
-        BranchAndFinancialInstitutionIdentification6,
-    >,
+    instd_rmbrsmnt_agt: ::std::option::Option<BranchAndFinancialInstitutionIdentification6>,
     instd_rmbrsmnt_agt_acct: ::std::option::Option<CashAccount40>,
-    thrd_rmbrsmnt_agt: ::std::option::Option<
-        BranchAndFinancialInstitutionIdentification6,
-    >,
+    thrd_rmbrsmnt_agt: ::std::option::Option<BranchAndFinancialInstitutionIdentification6>,
     thrd_rmbrsmnt_agt_acct: ::std::option::Option<CashAccount40>,
 }
 impl SettlementInstruction11Builder {
     /// Set the `sttlm_mtd` field.
     #[must_use]
-    pub fn sttlm_mtd(
-        mut self,
-        value: SettlementMethod1Code,
-    ) -> SettlementInstruction11Builder {
+    pub fn sttlm_mtd(mut self, value: SettlementMethod1Code) -> SettlementInstruction11Builder {
         self.sttlm_mtd = ::std::option::Option::Some(value);
         self
     }
@@ -9061,10 +8636,7 @@ pub struct StatusReasonInformation12Builder {
 impl StatusReasonInformation12Builder {
     /// Set the `orgtr` field.
     #[must_use]
-    pub fn orgtr(
-        mut self,
-        value: PartyIdentification135,
-    ) -> StatusReasonInformation12Builder {
+    pub fn orgtr(mut self, value: PartyIdentification135) -> StatusReasonInformation12Builder {
         self.orgtr = ::std::option::Option::Some(value);
         self
     }
@@ -9088,10 +8660,7 @@ impl StatusReasonInformation12Builder {
     }
     /// Append one item to the `addtl_inf` field.
     #[must_use]
-    pub fn add_addtl_inf(
-        mut self,
-        value: Max105Text,
-    ) -> StatusReasonInformation12Builder {
+    pub fn add_addtl_inf(mut self, value: Max105Text) -> StatusReasonInformation12Builder {
         self.addtl_inf.push(value);
         self
     }
@@ -9223,19 +8792,13 @@ impl StructuredRemittanceInformation17Builder {
     }
     /// Set the `tax_rmt` field.
     #[must_use]
-    pub fn tax_rmt(
-        mut self,
-        value: TaxData1,
-    ) -> StructuredRemittanceInformation17Builder {
+    pub fn tax_rmt(mut self, value: TaxData1) -> StructuredRemittanceInformation17Builder {
         self.tax_rmt = ::std::option::Option::Some(value);
         self
     }
     /// Set the `grnshmt_rmt` field.
     #[must_use]
-    pub fn grnshmt_rmt(
-        mut self,
-        value: Garnishment3,
-    ) -> StructuredRemittanceInformation17Builder {
+    pub fn grnshmt_rmt(mut self, value: Garnishment3) -> StructuredRemittanceInformation17Builder {
         self.grnshmt_rmt = ::std::option::Option::Some(value);
         self
     }
@@ -9270,10 +8833,7 @@ impl StructuredRemittanceInformation17Builder {
     /// missing-field check above.
     pub fn build(
         self,
-    ) -> ::std::result::Result<
-        StructuredRemittanceInformation17,
-        crate::common::BuilderError,
-    > {
+    ) -> ::std::result::Result<StructuredRemittanceInformation17, crate::common::BuilderError> {
         ::std::result::Result::Ok(StructuredRemittanceInformation17 {
             rfrd_doc_inf: self.rfrd_doc_inf,
             rfrd_doc_amt: self.rfrd_doc_amt,
@@ -9317,10 +8877,7 @@ impl SupplementaryData1Builder {
     }
     /// Set the `envlp` field.
     #[must_use]
-    pub fn envlp(
-        mut self,
-        value: SupplementaryDataEnvelope1,
-    ) -> SupplementaryData1Builder {
+    pub fn envlp(mut self, value: SupplementaryDataEnvelope1) -> SupplementaryData1Builder {
         self.envlp = ::std::option::Option::Some(value);
         self
     }
@@ -9335,9 +8892,7 @@ impl SupplementaryData1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<SupplementaryData1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<SupplementaryData1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.envlp.is_none() {
             missing.push("envlp".to_owned());
@@ -9401,28 +8956,19 @@ impl TaxAmount3Builder {
     }
     /// Set the `taxbl_base_amt` field.
     #[must_use]
-    pub fn taxbl_base_amt(
-        mut self,
-        value: ActiveOrHistoricCurrencyAndAmount,
-    ) -> TaxAmount3Builder {
+    pub fn taxbl_base_amt(mut self, value: ActiveOrHistoricCurrencyAndAmount) -> TaxAmount3Builder {
         self.taxbl_base_amt = ::std::option::Option::Some(value);
         self
     }
     /// Set the `ttl_amt` field.
     #[must_use]
-    pub fn ttl_amt(
-        mut self,
-        value: ActiveOrHistoricCurrencyAndAmount,
-    ) -> TaxAmount3Builder {
+    pub fn ttl_amt(mut self, value: ActiveOrHistoricCurrencyAndAmount) -> TaxAmount3Builder {
         self.ttl_amt = ::std::option::Option::Some(value);
         self
     }
     /// Set the `dtls` field (replaces any previously added items).
     #[must_use]
-    pub fn dtls(
-        mut self,
-        value: ::std::vec::Vec<TaxRecordDetails3>,
-    ) -> TaxAmount3Builder {
+    pub fn dtls(mut self, value: ::std::vec::Vec<TaxRecordDetails3>) -> TaxAmount3Builder {
         self.dtls = value;
         self
     }
@@ -9443,9 +8989,7 @@ impl TaxAmount3Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<TaxAmount3, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<TaxAmount3, crate::common::BuilderError> {
         ::std::result::Result::Ok(TaxAmount3 {
             rate: self.rate,
             taxbl_base_amt: self.taxbl_base_amt,
@@ -9488,10 +9032,7 @@ impl TaxAmountAndType1Builder {
     }
     /// Set the `amt` field.
     #[must_use]
-    pub fn amt(
-        mut self,
-        value: ActiveOrHistoricCurrencyAndAmount,
-    ) -> TaxAmountAndType1Builder {
+    pub fn amt(mut self, value: ActiveOrHistoricCurrencyAndAmount) -> TaxAmountAndType1Builder {
         self.amt = ::std::option::Option::Some(value);
         self
     }
@@ -9506,9 +9047,7 @@ impl TaxAmountAndType1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<TaxAmountAndType1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<TaxAmountAndType1, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.amt.is_none() {
             missing.push("amt".to_owned());
@@ -9580,9 +9119,7 @@ impl TaxAuthorisation1Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<TaxAuthorisation1, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<TaxAuthorisation1, crate::common::BuilderError> {
         ::std::result::Result::Ok(TaxAuthorisation1 {
             titl: self.titl,
             nm: self.nm,
@@ -9697,10 +9234,7 @@ impl TaxData1Builder {
     }
     /// Set the `ttl_tax_amt` field.
     #[must_use]
-    pub fn ttl_tax_amt(
-        mut self,
-        value: ActiveOrHistoricCurrencyAndAmount,
-    ) -> TaxData1Builder {
+    pub fn ttl_tax_amt(mut self, value: ActiveOrHistoricCurrencyAndAmount) -> TaxData1Builder {
         self.ttl_tax_amt = ::std::option::Option::Some(value);
         self
     }
@@ -9953,9 +9487,7 @@ impl TaxPeriod3Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<TaxPeriod3, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<TaxPeriod3, crate::common::BuilderError> {
         ::std::result::Result::Ok(TaxPeriod3 {
             yr: self.yr,
             tp: self.tp,
@@ -10080,9 +9612,7 @@ impl TaxRecord3Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<TaxRecord3, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<TaxRecord3, crate::common::BuilderError> {
         ::std::result::Result::Ok(TaxRecord3 {
             tp: self.tp,
             ctgy: self.ctgy,
@@ -10127,10 +9657,7 @@ impl TaxRecordDetails3Builder {
     }
     /// Set the `amt` field.
     #[must_use]
-    pub fn amt(
-        mut self,
-        value: ActiveOrHistoricCurrencyAndAmount,
-    ) -> TaxRecordDetails3Builder {
+    pub fn amt(mut self, value: ActiveOrHistoricCurrencyAndAmount) -> TaxRecordDetails3Builder {
         self.amt = ::std::option::Option::Some(value);
         self
     }
@@ -10145,9 +9672,7 @@ impl TaxRecordDetails3Builder {
     ///
     /// Does not panic — all `.unwrap()` calls are guarded by the
     /// missing-field check above.
-    pub fn build(
-        self,
-    ) -> ::std::result::Result<TaxRecordDetails3, crate::common::BuilderError> {
+    pub fn build(self) -> ::std::result::Result<TaxRecordDetails3, crate::common::BuilderError> {
         let mut missing: ::std::vec::Vec<::std::string::String> = ::std::vec::Vec::new();
         if self.amt.is_none() {
             missing.push("amt".to_owned());
@@ -10171,8 +9696,7 @@ impl TaxRecordDetails3 {
         TaxRecordDetails3Builder::default()
     }
 }
-impl crate::common::validate::Validatable
-for ActiveOrHistoricCurrencyAndAmountSimpleType {
+impl crate::common::validate::Validatable for ActiveOrHistoricCurrencyAndAmountSimpleType {
     #[allow(clippy::unreadable_literal)]
     fn validate_constraints(
         &self,
@@ -10181,25 +9705,22 @@ for ActiveOrHistoricCurrencyAndAmountSimpleType {
     ) {
         {
             let value: &str = &self.0;
-            let frac_count = value
-                .find('.')
-                .map_or(
-                    0,
-                    |dot| {
-                        value[dot + 1..].chars().filter(char::is_ascii_digit).count()
-                    },
-                );
+            let frac_count = value.find('.').map_or(0, |dot| {
+                value[dot + 1..]
+                    .chars()
+                    .filter(char::is_ascii_digit)
+                    .count()
+            });
             let violated = frac_count > 5usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum fraction digits 5",
-                            frac_count
-                        ),
-                        kind: crate::common::validate::ConstraintKind::FractionDigits,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!(
+                        "{} (got {})",
+                        "value exceeds maximum fraction digits 5", frac_count
+                    ),
+                    kind: crate::common::validate::ConstraintKind::FractionDigits,
+                });
             }
         }
         {
@@ -10207,15 +9728,14 @@ for ActiveOrHistoricCurrencyAndAmountSimpleType {
             let digit_count = value.chars().filter(char::is_ascii_digit).count();
             let violated = digit_count > 18usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum total digits 18",
-                            digit_count
-                        ),
-                        kind: crate::common::validate::ConstraintKind::TotalDigits,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!(
+                        "{} (got {})",
+                        "value exceeds maximum total digits 18", digit_count
+                    ),
+                    kind: crate::common::validate::ConstraintKind::TotalDigits,
+                });
             }
         }
     }
@@ -10246,12 +9766,11 @@ impl crate::common::validate::Validatable for ActiveOrHistoricCurrencyCode {
                     })
             };
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: "value does not match pattern [A-Z]{3,3}".to_string(),
-                        kind: crate::common::validate::ConstraintKind::Pattern,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: "value does not match pattern [A-Z]{3,3}".to_string(),
+                    kind: crate::common::validate::ConstraintKind::Pattern,
+                });
             }
         }
     }
@@ -10261,7 +9780,8 @@ impl crate::common::validate::Validatable for AddressType2Code {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for AnyBICDec2014Identifier {
     #[allow(clippy::unreadable_literal)]
@@ -10286,8 +9806,7 @@ impl crate::common::validate::Validatable for AnyBICDec2014Identifier {
                             return true;
                         }
                         for &b in &bytes[pos..end] {
-                            if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                            {
+                            if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                 return true;
                             }
                         }
@@ -10311,8 +9830,7 @@ impl crate::common::validate::Validatable for AnyBICDec2014Identifier {
                             return true;
                         }
                         for &b in &bytes[pos..end] {
-                            if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                            {
+                            if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                 return true;
                             }
                         }
@@ -10327,9 +9845,7 @@ impl crate::common::validate::Validatable for AnyBICDec2014Identifier {
                                     return true;
                                 }
                                 for &b in &bytes[pos..end] {
-                                    if !(65u8..=90u8).contains(&b)
-                                        && !(48u8..=57u8).contains(&b)
-                                    {
+                                    if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                         return true;
                                     }
                                 }
@@ -10383,8 +9899,7 @@ impl crate::common::validate::Validatable for BICFIDec2014Identifier {
                             return true;
                         }
                         for &b in &bytes[pos..end] {
-                            if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                            {
+                            if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                 return true;
                             }
                         }
@@ -10408,8 +9923,7 @@ impl crate::common::validate::Validatable for BICFIDec2014Identifier {
                             return true;
                         }
                         for &b in &bytes[pos..end] {
-                            if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                            {
+                            if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                 return true;
                             }
                         }
@@ -10424,9 +9938,7 @@ impl crate::common::validate::Validatable for BICFIDec2014Identifier {
                                     return true;
                                 }
                                 for &b in &bytes[pos..end] {
-                                    if !(65u8..=90u8).contains(&b)
-                                        && !(48u8..=57u8).contains(&b)
-                                    {
+                                    if !(65u8..=90u8).contains(&b) && !(48u8..=57u8).contains(&b) {
                                         return true;
                                     }
                                 }
@@ -10462,7 +9974,8 @@ impl crate::common::validate::Validatable for ClearingChannel2Code {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for CountryCode {
     #[allow(clippy::unreadable_literal)]
@@ -10486,12 +9999,11 @@ impl crate::common::validate::Validatable for CountryCode {
                     })
             };
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: "value does not match pattern [A-Z]{2,2}".to_string(),
-                        kind: crate::common::validate::ConstraintKind::Pattern,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: "value does not match pattern [A-Z]{2,2}".to_string(),
+                    kind: crate::common::validate::ConstraintKind::Pattern,
+                });
             }
         }
     }
@@ -10501,7 +10013,8 @@ impl crate::common::validate::Validatable for CreditDebitCode {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for DecimalNumber {
     #[allow(clippy::unreadable_literal)]
@@ -10512,25 +10025,22 @@ impl crate::common::validate::Validatable for DecimalNumber {
     ) {
         {
             let value: &str = &self.0;
-            let frac_count = value
-                .find('.')
-                .map_or(
-                    0,
-                    |dot| {
-                        value[dot + 1..].chars().filter(char::is_ascii_digit).count()
-                    },
-                );
+            let frac_count = value.find('.').map_or(0, |dot| {
+                value[dot + 1..]
+                    .chars()
+                    .filter(char::is_ascii_digit)
+                    .count()
+            });
             let violated = frac_count > 17usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum fraction digits 17",
-                            frac_count
-                        ),
-                        kind: crate::common::validate::ConstraintKind::FractionDigits,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!(
+                        "{} (got {})",
+                        "value exceeds maximum fraction digits 17", frac_count
+                    ),
+                    kind: crate::common::validate::ConstraintKind::FractionDigits,
+                });
             }
         }
         {
@@ -10538,15 +10048,14 @@ impl crate::common::validate::Validatable for DecimalNumber {
             let digit_count = value.chars().filter(char::is_ascii_digit).count();
             let violated = digit_count > 18usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum total digits 18",
-                            digit_count
-                        ),
-                        kind: crate::common::validate::ConstraintKind::TotalDigits,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!(
+                        "{} (got {})",
+                        "value exceeds maximum total digits 18", digit_count
+                    ),
+                    kind: crate::common::validate::ConstraintKind::TotalDigits,
+                });
             }
         }
     }
@@ -10556,14 +10065,16 @@ impl crate::common::validate::Validatable for DocumentType3Code {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for DocumentType6Code {
     fn validate_constraints(
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for Exact2NumericText {
     #[allow(clippy::unreadable_literal)]
@@ -10587,12 +10098,11 @@ impl crate::common::validate::Validatable for Exact2NumericText {
                     })
             };
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: "value does not match pattern [0-9]{2}".to_string(),
-                        kind: crate::common::validate::ConstraintKind::Pattern,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: "value does not match pattern [0-9]{2}".to_string(),
+                    kind: crate::common::validate::ConstraintKind::Pattern,
+                });
             }
         }
     }
@@ -10611,33 +10121,35 @@ impl crate::common::validate::Validatable for Exact4AlphaNumericText {
                 bytes.len() != 4usize
                     || ({
                         let b = bytes[0usize];
-                        !(97u8..=122u8).contains(&b) && !(65u8..=90u8).contains(&b)
+                        !(97u8..=122u8).contains(&b)
+                            && !(65u8..=90u8).contains(&b)
                             && !(48u8..=57u8).contains(&b)
                     })
                     || ({
                         let b = bytes[1usize];
-                        !(97u8..=122u8).contains(&b) && !(65u8..=90u8).contains(&b)
+                        !(97u8..=122u8).contains(&b)
+                            && !(65u8..=90u8).contains(&b)
                             && !(48u8..=57u8).contains(&b)
                     })
                     || ({
                         let b = bytes[2usize];
-                        !(97u8..=122u8).contains(&b) && !(65u8..=90u8).contains(&b)
+                        !(97u8..=122u8).contains(&b)
+                            && !(65u8..=90u8).contains(&b)
                             && !(48u8..=57u8).contains(&b)
                     })
                     || ({
                         let b = bytes[3usize];
-                        !(97u8..=122u8).contains(&b) && !(65u8..=90u8).contains(&b)
+                        !(97u8..=122u8).contains(&b)
+                            && !(65u8..=90u8).contains(&b)
                             && !(48u8..=57u8).contains(&b)
                     })
             };
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: "value does not match pattern [a-zA-Z0-9]{4}"
-                            .to_string(),
-                        kind: crate::common::validate::ConstraintKind::Pattern,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: "value does not match pattern [a-zA-Z0-9]{4}".to_string(),
+                    kind: crate::common::validate::ConstraintKind::Pattern,
+                });
             }
         }
     }
@@ -10653,27 +10165,21 @@ impl crate::common::validate::Validatable for ExternalAccountIdentification1Code
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -10689,27 +10195,21 @@ impl crate::common::validate::Validatable for ExternalCashAccountType1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -10725,27 +10225,21 @@ impl crate::common::validate::Validatable for ExternalCashClearingSystem1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 3usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 3", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 3", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -10761,27 +10255,21 @@ impl crate::common::validate::Validatable for ExternalCategoryPurpose1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -10797,27 +10285,21 @@ impl crate::common::validate::Validatable for ExternalClearingSystemIdentificati
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 5usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 5", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 5", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -10833,27 +10315,21 @@ impl crate::common::validate::Validatable for ExternalDiscountAmountType1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -10869,33 +10345,26 @@ impl crate::common::validate::Validatable for ExternalDocumentLineType1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
 }
-impl crate::common::validate::Validatable
-for ExternalFinancialInstitutionIdentification1Code {
+impl crate::common::validate::Validatable for ExternalFinancialInstitutionIdentification1Code {
     #[allow(clippy::unreadable_literal)]
     fn validate_constraints(
         &self,
@@ -10906,27 +10375,21 @@ for ExternalFinancialInstitutionIdentification1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -10942,27 +10405,21 @@ impl crate::common::validate::Validatable for ExternalGarnishmentType1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -10978,27 +10435,21 @@ impl crate::common::validate::Validatable for ExternalLocalInstrument1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 35usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 35", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 35", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11014,27 +10465,21 @@ impl crate::common::validate::Validatable for ExternalMandateSetupReason1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11050,27 +10495,21 @@ impl crate::common::validate::Validatable for ExternalOrganisationIdentification
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11086,27 +10525,21 @@ impl crate::common::validate::Validatable for ExternalPaymentGroupStatus1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11122,27 +10555,21 @@ impl crate::common::validate::Validatable for ExternalPaymentTransactionStatus1C
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11158,27 +10585,21 @@ impl crate::common::validate::Validatable for ExternalPersonIdentification1Code 
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11194,27 +10615,21 @@ impl crate::common::validate::Validatable for ExternalProxyAccountType1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11230,27 +10645,21 @@ impl crate::common::validate::Validatable for ExternalPurpose1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11266,27 +10675,21 @@ impl crate::common::validate::Validatable for ExternalServiceLevel1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11302,27 +10705,21 @@ impl crate::common::validate::Validatable for ExternalStatusReason1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11338,27 +10735,21 @@ impl crate::common::validate::Validatable for ExternalTaxAmountType1Code {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11368,7 +10759,8 @@ impl crate::common::validate::Validatable for Frequency6Code {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for IBAN2007Identifier {
     #[allow(clippy::unreadable_literal)]
@@ -11441,13 +10833,12 @@ impl crate::common::validate::Validatable for IBAN2007Identifier {
                 result
             };
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: "value does not match pattern [A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
-                            .to_string(),
-                        kind: crate::common::validate::ConstraintKind::Pattern,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: "value does not match pattern [A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"
+                        .to_string(),
+                    kind: crate::common::validate::ConstraintKind::Pattern,
+                });
             }
         }
     }
@@ -11457,21 +10848,24 @@ impl crate::common::validate::Validatable for ISODate {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for ISODateTime {
     fn validate_constraints(
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for ISOYear {
     fn validate_constraints(
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for LEIIdentifier {
     #[allow(clippy::unreadable_literal)]
@@ -11567,13 +10961,11 @@ impl crate::common::validate::Validatable for LEIIdentifier {
                     })
             };
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: "value does not match pattern [A-Z0-9]{18,18}[0-9]{2,2}"
-                            .to_string(),
-                        kind: crate::common::validate::ConstraintKind::Pattern,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: "value does not match pattern [A-Z0-9]{18,18}[0-9]{2,2}".to_string(),
+                    kind: crate::common::validate::ConstraintKind::Pattern,
+                });
             }
         }
     }
@@ -11583,7 +10975,8 @@ impl crate::common::validate::Validatable for MandateClassification1Code {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for Max1025Text {
     #[allow(clippy::unreadable_literal)]
@@ -11596,27 +10989,21 @@ impl crate::common::validate::Validatable for Max1025Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 1025usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 1025", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 1025", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11632,27 +11019,21 @@ impl crate::common::validate::Validatable for Max105Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 105usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 105", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 105", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11668,27 +11049,21 @@ impl crate::common::validate::Validatable for Max10KBinary {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 10240usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 10240", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 10240", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11704,27 +11079,21 @@ impl crate::common::validate::Validatable for Max128Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 128usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 128", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 128", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11740,27 +11109,21 @@ impl crate::common::validate::Validatable for Max140Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 140usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 140", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 140", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11809,12 +11172,11 @@ impl crate::common::validate::Validatable for Max15NumericText {
                 result
             };
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: "value does not match pattern [0-9]{1,15}".to_string(),
-                        kind: crate::common::validate::ConstraintKind::Pattern,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: "value does not match pattern [0-9]{1,15}".to_string(),
+                    kind: crate::common::validate::ConstraintKind::Pattern,
+                });
             }
         }
     }
@@ -11830,27 +11192,21 @@ impl crate::common::validate::Validatable for Max16Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 16usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 16", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 16", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11866,27 +11222,21 @@ impl crate::common::validate::Validatable for Max2048Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 2048usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 2048", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 2048", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11902,27 +11252,21 @@ impl crate::common::validate::Validatable for Max34Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 34usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 34", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 34", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11938,27 +11282,21 @@ impl crate::common::validate::Validatable for Max350Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 350usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 350", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 350", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -11974,27 +11312,21 @@ impl crate::common::validate::Validatable for Max35Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 35usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 35", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 35", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -12010,27 +11342,21 @@ impl crate::common::validate::Validatable for Max4Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 4usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 4", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 4", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -12046,27 +11372,21 @@ impl crate::common::validate::Validatable for Max70Text {
         {
             let violated = len < 1usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value is shorter than minimum length 1", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MinLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value is shorter than minimum length 1", len),
+                    kind: crate::common::validate::ConstraintKind::MinLength,
+                });
             }
         }
         {
             let violated = len > 70usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum length 70", len
-                        ),
-                        kind: crate::common::validate::ConstraintKind::MaxLength,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!("{} (got {})", "value exceeds maximum length 70", len),
+                    kind: crate::common::validate::ConstraintKind::MaxLength,
+                });
             }
         }
     }
@@ -12076,7 +11396,8 @@ impl crate::common::validate::Validatable for NamePrefix2Code {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for Number {
     #[allow(clippy::unreadable_literal)]
@@ -12087,25 +11408,22 @@ impl crate::common::validate::Validatable for Number {
     ) {
         {
             let value: &str = &self.0;
-            let frac_count = value
-                .find('.')
-                .map_or(
-                    0,
-                    |dot| {
-                        value[dot + 1..].chars().filter(char::is_ascii_digit).count()
-                    },
-                );
+            let frac_count = value.find('.').map_or(0, |dot| {
+                value[dot + 1..]
+                    .chars()
+                    .filter(char::is_ascii_digit)
+                    .count()
+            });
             let violated = frac_count > 0usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum fraction digits 0",
-                            frac_count
-                        ),
-                        kind: crate::common::validate::ConstraintKind::FractionDigits,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!(
+                        "{} (got {})",
+                        "value exceeds maximum fraction digits 0", frac_count
+                    ),
+                    kind: crate::common::validate::ConstraintKind::FractionDigits,
+                });
             }
         }
         {
@@ -12113,15 +11431,14 @@ impl crate::common::validate::Validatable for Number {
             let digit_count = value.chars().filter(char::is_ascii_digit).count();
             let violated = digit_count > 18usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum total digits 18",
-                            digit_count
-                        ),
-                        kind: crate::common::validate::ConstraintKind::TotalDigits,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!(
+                        "{} (got {})",
+                        "value exceeds maximum total digits 18", digit_count
+                    ),
+                    kind: crate::common::validate::ConstraintKind::TotalDigits,
+                });
             }
         }
     }
@@ -12131,7 +11448,8 @@ impl crate::common::validate::Validatable for PaymentMethod4Code {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for PercentageRate {
     #[allow(clippy::unreadable_literal)]
@@ -12142,25 +11460,22 @@ impl crate::common::validate::Validatable for PercentageRate {
     ) {
         {
             let value: &str = &self.0;
-            let frac_count = value
-                .find('.')
-                .map_or(
-                    0,
-                    |dot| {
-                        value[dot + 1..].chars().filter(char::is_ascii_digit).count()
-                    },
-                );
+            let frac_count = value.find('.').map_or(0, |dot| {
+                value[dot + 1..]
+                    .chars()
+                    .filter(char::is_ascii_digit)
+                    .count()
+            });
             let violated = frac_count > 10usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum fraction digits 10",
-                            frac_count
-                        ),
-                        kind: crate::common::validate::ConstraintKind::FractionDigits,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!(
+                        "{} (got {})",
+                        "value exceeds maximum fraction digits 10", frac_count
+                    ),
+                    kind: crate::common::validate::ConstraintKind::FractionDigits,
+                });
             }
         }
         {
@@ -12168,15 +11483,14 @@ impl crate::common::validate::Validatable for PercentageRate {
             let digit_count = value.chars().filter(char::is_ascii_digit).count();
             let violated = digit_count > 11usize;
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: format!(
-                            "{} (got {})", "value exceeds maximum total digits 11",
-                            digit_count
-                        ),
-                        kind: crate::common::validate::ConstraintKind::TotalDigits,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: format!(
+                        "{} (got {})",
+                        "value exceeds maximum total digits 11", digit_count
+                    ),
+                    kind: crate::common::validate::ConstraintKind::TotalDigits,
+                });
             }
         }
     }
@@ -12204,7 +11518,11 @@ impl crate::common::validate::Validatable for PhoneNumber {
                     pos += 1;
                     {
                         let start = pos;
-                        let limit = if pos + 3usize < len { pos + 3usize } else { len };
+                        let limit = if pos + 3usize < len {
+                            pos + 3usize
+                        } else {
+                            len
+                        };
                         while pos < limit {
                             let b = bytes[pos];
                             if !(48u8..=57u8).contains(&b) {
@@ -12230,8 +11548,11 @@ impl crate::common::validate::Validatable for PhoneNumber {
                         };
                         while pos < limit {
                             let b = bytes[pos];
-                            if !(48u8..=57u8).contains(&b) && b != 40u8 && b != 41u8
-                                && b != 43u8 && b != 45u8
+                            if !(48u8..=57u8).contains(&b)
+                                && b != 40u8
+                                && b != 41u8
+                                && b != 43u8
+                                && b != 45u8
                             {
                                 break;
                             }
@@ -12250,13 +11571,12 @@ impl crate::common::validate::Validatable for PhoneNumber {
                 result
             };
             if violated {
-                violations
-                    .push(crate::common::validate::ConstraintViolation {
-                        path: path.to_string(),
-                        message: "value does not match pattern \\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
-                            .to_string(),
-                        kind: crate::common::validate::ConstraintKind::Pattern,
-                    });
+                violations.push(crate::common::validate::ConstraintViolation {
+                    path: path.to_string(),
+                    message: "value does not match pattern \\+[0-9]{1,3}-[0-9()+\\-]{1,30}"
+                        .to_string(),
+                    kind: crate::common::validate::ConstraintKind::Pattern,
+                });
             }
         }
     }
@@ -12266,42 +11586,48 @@ impl crate::common::validate::Validatable for PreferredContactMethod1Code {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for Priority2Code {
     fn validate_constraints(
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for SequenceType3Code {
     fn validate_constraints(
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for SettlementMethod1Code {
     fn validate_constraints(
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for TaxRecordPeriod1Code {
     fn validate_constraints(
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for TrueFalseIndicator {
     fn validate_constraints(
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for UUIDv4Identifier {
     #[allow(clippy::unreadable_literal)]
@@ -12346,7 +11672,8 @@ impl crate::common::validate::Validatable for UUIDv4Identifier {
                     || ({
                         let b = bytes[7usize];
                         !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                    }) || bytes[8usize] != 45u8
+                    })
+                    || bytes[8usize] != 45u8
                     || ({
                         let b = bytes[9usize];
                         !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
@@ -12362,7 +11689,9 @@ impl crate::common::validate::Validatable for UUIDv4Identifier {
                     || ({
                         let b = bytes[12usize];
                         !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                    }) || bytes[13usize] != 45u8 || bytes[14usize] != 52u8
+                    })
+                    || bytes[13usize] != 45u8
+                    || bytes[14usize] != 52u8
                     || ({
                         let b = bytes[15usize];
                         !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
@@ -12374,7 +11703,8 @@ impl crate::common::validate::Validatable for UUIDv4Identifier {
                     || ({
                         let b = bytes[17usize];
                         !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                    }) || bytes[18usize] != 45u8
+                    })
+                    || bytes[18usize] != 45u8
                     || ({
                         let b = bytes[19usize];
                         b != 56u8 && b != 57u8 && b != 97u8 && b != 98u8
@@ -12390,7 +11720,8 @@ impl crate::common::validate::Validatable for UUIDv4Identifier {
                     || ({
                         let b = bytes[22usize];
                         !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
-                    }) || bytes[23usize] != 45u8
+                    })
+                    || bytes[23usize] != 45u8
                     || ({
                         let b = bytes[24usize];
                         !(97u8..=102u8).contains(&b) && !(48u8..=57u8).contains(&b)
@@ -12719,8 +12050,7 @@ impl crate::common::validate::Validatable for AmountType4Choice {
         }
     }
 }
-impl crate::common::validate::Validatable
-for BranchAndFinancialInstitutionIdentification6 {
+impl crate::common::validate::Validatable for BranchAndFinancialInstitutionIdentification6 {
     fn validate_constraints(
         &self,
         path: &str,
@@ -13514,7 +12844,8 @@ impl crate::common::validate::Validatable for Document {
     ) {
         {
             let snap = violations.len();
-            self.fi_to_fi_pmt_sts_rpt.validate_constraints("", violations);
+            self.fi_to_fi_pmt_sts_rpt
+                .validate_constraints("", violations);
             if violations.len() > snap {
                 let pfx = format!("{path}/FIToFIPmtStsRpt");
                 for v in &mut violations[snap..] {
@@ -14722,8 +14053,7 @@ impl crate::common::validate::Validatable for OrganisationIdentification29 {
         }
     }
 }
-impl crate::common::validate::Validatable
-for OrganisationIdentificationSchemeName1Choice {
+impl crate::common::validate::Validatable for OrganisationIdentificationSchemeName1Choice {
     fn validate_constraints(
         &self,
         path: &str,
@@ -16438,7 +15768,8 @@ impl crate::common::validate::Validatable for SupplementaryDataEnvelope1 {
         &self,
         _path: &str,
         _violations: &mut Vec<crate::common::validate::ConstraintViolation>,
-    ) {}
+    ) {
+    }
 }
 impl crate::common::validate::Validatable for TaxAmount3 {
     fn validate_constraints(
