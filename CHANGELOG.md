@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-05-05
+
+### Added
+
+- New `legacy-pacs` feature flag in `mx20022-model` exposing four predecessor
+  message versions still in active use: `pacs.002.001.10`, `pacs.002.001.12`,
+  `pacs.008.001.08`, `pacs.008.001.10`. The `all` feature now includes
+  `legacy-pacs`. (#20)
+- `mx20022::prelude` curated re-exports for typical workflows (errors, the
+  `mt` module, envelope detection, validation entry points, the six MT ↔ MX
+  translation functions). The umbrella crate now ships with three runnable
+  quickstart doctests for envelope detection, MT103 → pacs.008 translation,
+  and IBAN validation. (#21)
+- `mx20022_translate::mappings::charset::wrap_lines` plus `WrapError` for
+  SWIFT MT line-budget wrapping (word-wrap with hard-cut and overflow
+  reporting). (#22)
+- `mx20022_parse::de::from_str_in_envelope` for deserialization that tags
+  failures with the detected ISO 20022 message identifier. New error
+  variant `ParseError::DeserializeIn { context, source }` carries the
+  detected dotted message ID alongside the underlying `quick_xml`
+  diagnostic. (#23)
+- Crate-level quickstart and supported-pair matrix on
+  `mx20022-translate`. (#24)
+
+### Changed
+
+- **Behavior change:** `pacs008_to_mt103` and `pacs009_to_mt202` no longer
+  substitute the literal `"UNKNOWNXXXXX"` placeholder when `DbtrAgt` /
+  `CdtrAgt` (pacs.008) or `Dbtr` / `Cdtr` (pacs.009) lacks a BICFI / Nm.
+  These callers now return `TranslationError::MissingField`. The previous
+  output was a schema-invalid 12-character placeholder; consumers that
+  relied on the silent fallback need to attach a BIC before translating.
+  (#18)
+- **Behavior change:** `mt940_to_camt053` no longer emits an empty
+  `Ccy` on each `ReportEntry13` amount. The entry currency is now
+  inherited from the `:60F:` opening balance; entries are rejected
+  with a `:61:`-tagged warning when the opening balance carries no
+  currency. (#19)
+- `pacs008_to_mt103` enforces the SWIFT 4 × 35 line budget on `:50K:`,
+  `:59:`, and `:70:`. The party account line is hard-truncated and the
+  party name is word-wrapped onto remaining lines, with truncation
+  warnings tagged by field. (#22)
+
+### Fixed
+
+- MT940 → camt.053 round-trips now produce schema-valid currency on
+  every entry instead of an empty `Ccy` placeholder. (#19)
+
 ## [0.2.0] - 2026-04-25
 
 ### Changed
@@ -98,6 +146,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Performance benchmarks: parse, serialize, validate, translate
 - XSD schema download script
 
-[Unreleased]: https://github.com/jamesray/mx20022/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/jamesray/mx20022/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/jamesray/mx20022/releases/tag/v0.1.0
+[Unreleased]: https://github.com/socrates8300/mx20022/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/socrates8300/mx20022/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/socrates8300/mx20022/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/socrates8300/mx20022/releases/tag/v0.1.0
