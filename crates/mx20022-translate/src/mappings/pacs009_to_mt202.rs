@@ -62,20 +62,19 @@ pub fn pacs009_to_mt202(
         ("58A".into(), field_58),
     ];
 
-    let sender_bic = extract_bic_from_fi6(&tx.dbtr).unwrap_or_else(|| {
-        warnings.add(
-            "Dbtr/FinInstnId/BICFI",
-            "BIC unavailable; using placeholder",
-        );
-        "UNKNOWNXXXXX".to_string()
-    });
-    let receiver_bic = extract_bic_from_fi6(&tx.cdtr).unwrap_or_else(|| {
-        warnings.add(
-            "Cdtr/FinInstnId/BICFI",
-            "BIC unavailable; using placeholder",
-        );
-        "UNKNOWNXXXXX".to_string()
-    });
+    // Sender/receiver BICs are required for the MT application header.
+    // Producing a placeholder here would emit a schema-invalid MT message
+    // (no valid BIC is 12 characters), so absence is a translation error.
+    let sender_bic =
+        extract_bic_from_fi6(&tx.dbtr).ok_or_else(|| TranslationError::MissingField {
+            field: "Dbtr/FinInstnId/BICFI".into(),
+            context: "pacs009_to_mt202 (block 1 sender)".into(),
+        })?;
+    let receiver_bic =
+        extract_bic_from_fi6(&tx.cdtr).ok_or_else(|| TranslationError::MissingField {
+            field: "Cdtr/FinInstnId/BICFI".into(),
+            context: "pacs009_to_mt202 (block 2 receiver)".into(),
+        })?;
 
     let mt_text = format_mt_message("202", &sender_bic, &receiver_bic, &fields);
 
@@ -124,6 +123,7 @@ mod tests {
 :20:TXN-REF-202-001
 :21:REL-REF-001
 :32A:230615USD50000,00
+:52A:BANKBEBBAXXX
 :58A:CHASUS33XXX
 -}{5:{CHK:DEF12345678}}";
 
@@ -168,5 +168,43 @@ mod tests {
             "result: {}",
             result.message
         );
+    }
+
+    #[test]
+    fn test_pacs009_to_mt202_missing_sender_bic_errors() {
+        let mut doc = roundtrip_doc();
+        let tx = &mut doc.fi_cdt_trf.cdt_trf_tx_inf[0];
+        tx.dbtr.fin_instn_id.bicfi = None;
+        tx.dbtr.fin_instn_id.nm = None;
+
+        let err = pacs009_to_mt202(&doc).unwrap_err();
+        match err {
+            TranslationError::MissingField { ref field, .. } => {
+                assert!(
+                    field.starts_with("Dbtr/"),
+                    "expected Dbtr missing-field error, got: {field}"
+                );
+            }
+            _ => panic!("expected MissingField, got: {err}"),
+        }
+    }
+
+    #[test]
+    fn test_pacs009_to_mt202_missing_receiver_bic_errors() {
+        let mut doc = roundtrip_doc();
+        let tx = &mut doc.fi_cdt_trf.cdt_trf_tx_inf[0];
+        tx.cdtr.fin_instn_id.bicfi = None;
+        tx.cdtr.fin_instn_id.nm = None;
+
+        let err = pacs009_to_mt202(&doc).unwrap_err();
+        match err {
+            TranslationError::MissingField { ref field, .. } => {
+                assert!(
+                    field.starts_with("Cdtr/"),
+                    "expected Cdtr missing-field error, got: {field}"
+                );
+            }
+            _ => panic!("expected MissingField, got: {err}"),
+        }
     }
 }
