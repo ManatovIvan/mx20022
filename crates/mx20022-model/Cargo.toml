@@ -14,10 +14,13 @@ categories = ["encoding", "data-structures"]
 [features]
 default = ["pacs"]
 pacs = []
+# Older pacs message versions kept for back-compat with banks that have not
+# upgraded. Implies `pacs`.
+legacy-pacs = ["pacs"]
 pain = []
 camt = []
 head = []
-all = ["pacs", "pain", "camt", "head"]
+all = ["pacs", "legacy-pacs", "pain", "camt", "head"]
 
 [dependencies]
 serde.workspace = true
