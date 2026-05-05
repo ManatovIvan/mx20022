@@ -75,10 +75,16 @@
 //!
 //! # Quick start: pacs.008.001.13 → MT103
 //!
+//! `pacs008_to_mt103` requires the source pacs.008 to carry a BICFI
+//! or party name on `DbtrAgt` and `CdtrAgt` (the BICs that go into
+//! the MT message header). The fixture below adds `:52A:` and
+//! `:57A:` to the source MT103 so the round-trip carries that data
+//! through.
+//!
 //! ```
 //! # use mx20022_translate::mappings::{mt103_to_pacs008::mt103_to_pacs008, pacs008_to_mt103::pacs008_to_mt103};
 //! # use mx20022_translate::mt::{self, fields::mt103::parse_mt103};
-//! # let raw = "{1:F01BANKBEBBAXXX0000000000}{2:I103BANKDEFFXXXXN}{3:{108:R}}{4:\n:20:R\n:23B:CRED\n:32A:230615EUR1,00\n:50K:A\n:59:B\n:71A:SHA\n-}{5:{CHK:0}}";
+//! # let raw = "{1:F01BANKBEBBAXXX0000000000}{2:I103BANKDEFFXXXXN}{3:{108:R}}{4:\n:20:R\n:23B:CRED\n:32A:230615EUR1,00\n:52A:BANKBEBBAXXX\n:50K:A\n:57A:BANKDEFFXXXX\n:59:B\n:71A:SHA\n-}{5:{CHK:0}}";
 //! # let mt103 = parse_mt103(&mt::parse(raw).unwrap().block4).unwrap();
 //! # let doc = mt103_to_pacs008(&mt103, "M", "2023-06-15T10:00:00").unwrap().message;
 //! let result = pacs008_to_mt103(&doc).unwrap();
