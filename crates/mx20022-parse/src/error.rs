@@ -9,6 +9,19 @@ pub enum ParseError {
     #[error("XML deserialization error: {0}")]
     Deserialize(#[from] quick_xml::DeError),
 
+    /// XML deserialization failed for a document whose envelope was
+    /// successfully detected. `context` carries the dotted message
+    /// identifier (e.g. `"pacs.008.001.13"`); `source` is the underlying
+    /// `quick_xml` diagnostic.
+    #[error("XML deserialization error in {context}: {source}")]
+    DeserializeIn {
+        /// Free-form description of the envelope being parsed.
+        context: String,
+        /// The underlying `quick_xml` deserialization error.
+        #[source]
+        source: quick_xml::DeError,
+    },
+
     /// XML serialization failed.
     #[error("XML serialization error: {0}")]
     Serialize(#[from] quick_xml::SeError),
