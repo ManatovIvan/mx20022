@@ -11,10 +11,10 @@ status row below; PRs are linked where they exist.
 | 1 | Replace `"UNKNOWNXXXXX"` placeholder BIC in pacs.008 → MT103 and pacs.009 → MT202 with `TranslationError::MissingField` | completed | [#18](https://github.com/socrates8300/mx20022/pull/18) (merged) |
 | 2 | Add `TranslationOptions { lossy: bool }` gate for silently dropped MT103 fields (`:53/:54/:71F/:71G/:72`) | deferred | — |
 | 3 | Derive `camt.053` entry currency from MT940 `:60F:` opening balance | completed | [#19](https://github.com/socrates8300/mx20022/pull/19) (merged) |
-| 4 | Export the four dormant generated pacs versions (`pacs.002.001.10`, `pacs.002.001.12`, `pacs.008.001.08`, `pacs.008.001.10`) | completed | [#20](https://github.com/socrates8300/mx20022/pull/20) |
-| 5 | Curated `prelude` and quickstart docs on the umbrella `mx20022` crate | completed | [#21](https://github.com/socrates8300/mx20022/pull/21) |
+| 4 | Export the four dormant generated pacs versions (`pacs.002.001.10`, `pacs.002.001.12`, `pacs.008.001.08`, `pacs.008.001.10`) | completed | [#20](https://github.com/socrates8300/mx20022/pull/20) (merged) |
+| 5 | Curated `prelude` and quickstart docs on the umbrella `mx20022` crate | completed | [#21](https://github.com/socrates8300/mx20022/pull/21) (merged) |
 | 6 | SWIFT line-wrap budget for MX → MT party and remittance fields | completed | [#22](https://github.com/socrates8300/mx20022/pull/22) |
-| 7 | Wrap `quick_xml::DeError` with detected `MessageId` context | completed | [#23](https://github.com/socrates8300/mx20022/pull/23) |
+| 7 | Wrap `quick_xml::DeError` with detected `MessageId` context | completed | [#23](https://github.com/socrates8300/mx20022/pull/23) (merged) |
 | 8 | Expand `mx20022-translate` crate docs with quickstart and supported-pair matrix | completed | [#24](https://github.com/socrates8300/mx20022/pull/24) |
 
 ## Deferral details
