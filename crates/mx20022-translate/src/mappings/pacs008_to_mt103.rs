@@ -3,9 +3,15 @@
 use mx20022_model::generated::pacs::pacs_008_001_13 as pacs008;
 
 use crate::mappings::{
+    charset::wrap_lines,
     error::{TranslationError, TranslationResult, TranslationWarnings},
     helpers::{code_to_charges, format_mt_message, iso_date_to_yymmdd},
 };
+
+/// SWIFT MT line length budget for narrative fields like :50K:, :59:, :70:.
+const MT_LINE_LEN: usize = 35;
+/// SWIFT MT max line count for :50K: / :59: party blocks and :70: remittance.
+const MT_PARTY_MAX_LINES: usize = 4;
 
 /// Translate a `pacs.008.001.13` `Document` to an MT103 message string.
 ///
@@ -56,10 +62,10 @@ pub fn pacs008_to_mt103(
     let sttlm_field = format!("{value_date_swift}{ccy}{amt_swift}");
 
     // :50K: ordering customer (Dbtr + DbtrAcct)
-    let ordering_party = build_party_field(&tx.dbtr, tx.dbtr_acct.as_ref());
+    let ordering_party = build_party_field(&tx.dbtr, tx.dbtr_acct.as_ref(), "50K", &mut warnings);
 
     // :59: beneficiary (Cdtr + CdtrAcct)
-    let beneficiary = build_party_field(&tx.cdtr, tx.cdtr_acct.as_ref());
+    let beneficiary = build_party_field(&tx.cdtr, tx.cdtr_acct.as_ref(), "59", &mut warnings);
 
     // :71A: charge bearer
     let charge_bearer = code_to_charges(&tx.chrg_br);
@@ -74,7 +80,9 @@ pub fn pacs008_to_mt103(
         ("71A".into(), charge_bearer.into()),
     ];
 
-    // :70: remittance info (optional)
+    // :70: remittance info (optional). Wrap to MT 4×35 budget; on
+    // overflow, emit the truncation and warn so callers can detect
+    // data loss.
     if let Some(rmt) = &tx.rmt_inf {
         if !rmt.ustrd.is_empty() {
             let text: String = rmt
@@ -83,7 +91,22 @@ pub fn pacs008_to_mt103(
                 .map(|t| t.0.as_str())
                 .collect::<Vec<_>>()
                 .join(" ");
-            fields.push(("70".into(), text));
+            let wrapped = match wrap_lines(&text, MT_LINE_LEN, MT_PARTY_MAX_LINES) {
+                Ok(lines) => lines,
+                Err(e) => {
+                    warnings.add(
+                        ":70:",
+                        format!(
+                            "remittance info truncated: {} chars dropped (MT :70: max {}x{})",
+                            e.overflow_chars, MT_PARTY_MAX_LINES, MT_LINE_LEN
+                        ),
+                    );
+                    e.truncated
+                }
+            };
+            if !wrapped.is_empty() {
+                fields.push(("70".into(), wrapped.join("\n")));
+            }
         }
     }
 
@@ -116,30 +139,68 @@ pub fn pacs008_to_mt103(
 ///
 /// Format:
 /// ```text
-/// /IBAN_OR_ACCOUNT   (if account present)
-/// PARTY NAME
+/// /IBAN_OR_ACCOUNT   (if account present, on its own line)
+/// PARTY NAME (wrapped onto remaining lines, MT 4x35 budget)
 /// ```
+///
+/// The MT :50K: / :59: party fields are limited to 4 lines of 35
+/// characters. The account line (`/...`) is hard-truncated if it
+/// exceeds the budget; the name is word-wrapped onto whatever lines
+/// remain. Anything that does not fit is dropped and a warning is
+/// recorded against `field_tag`.
 fn build_party_field(
     party: &pacs008::PartyIdentification272,
     acct: Option<&pacs008::CashAccount40>,
+    field_tag: &str,
+    warnings: &mut TranslationWarnings,
 ) -> String {
     let mut lines: Vec<String> = Vec::new();
 
     if let Some(a) = acct {
         if let Some(id) = &a.id {
-            match &id.inner {
-                pacs008::AccountIdentification4Choice::IBAN(iban) => {
-                    lines.push(format!("/{}", iban.0));
-                }
-                pacs008::AccountIdentification4Choice::Othr(othr) => {
-                    lines.push(format!("/{}", othr.id.0));
-                }
+            let acct_line = match &id.inner {
+                pacs008::AccountIdentification4Choice::IBAN(iban) => format!("/{}", iban.0),
+                pacs008::AccountIdentification4Choice::Othr(othr) => format!("/{}", othr.id.0),
+            };
+            if acct_line.len() > MT_LINE_LEN {
+                warnings.add(
+                    format!(":{field_tag}:"),
+                    format!(
+                        "account line truncated: {} chars over the MT {}-char limit",
+                        acct_line.len() - MT_LINE_LEN,
+                        MT_LINE_LEN
+                    ),
+                );
+                lines.push(acct_line[..MT_LINE_LEN].to_string());
+            } else {
+                lines.push(acct_line);
             }
         }
     }
 
+    let name_budget = MT_PARTY_MAX_LINES.saturating_sub(lines.len());
     if let Some(nm) = &party.nm {
-        lines.push(nm.0.clone());
+        if name_budget == 0 {
+            warnings.add(
+                format!(":{field_tag}:"),
+                "party name dropped: no MT lines remain after the account line".to_string(),
+            );
+        } else {
+            let wrapped = match wrap_lines(&nm.0, MT_LINE_LEN, name_budget) {
+                Ok(l) => l,
+                Err(e) => {
+                    warnings.add(
+                        format!(":{field_tag}:"),
+                        format!(
+                            "party name truncated: {} chars dropped (max {}x{})",
+                            e.overflow_chars, name_budget, MT_LINE_LEN
+                        ),
+                    );
+                    e.truncated
+                }
+            };
+            lines.extend(wrapped);
+        }
     }
 
     lines.join("\n")
@@ -251,5 +312,106 @@ JANE SMITH
         };
         let err = pacs008_to_mt103(&doc).unwrap_err();
         assert!(matches!(err, TranslationError::MissingField { .. }));
+    }
+
+    #[test]
+    fn test_pacs008_to_mt103_wraps_long_party_name() {
+        let mut doc = roundtrip_doc();
+        let tx = &mut doc.fi_to_fi_cstmr_cdt_trf.cdt_trf_tx_inf[0];
+        // Replace the dbtr name with one that exceeds the 35-char single
+        // line budget but fits when wrapped onto the remaining 3 lines
+        // (account is on line 1).
+        tx.dbtr.nm = Some(pacs008::Max140Text(
+            "ACME CORPORATION INTERNATIONAL HOLDINGS LIMITED PARTNERSHIP".to_string(),
+        ));
+
+        let result = pacs008_to_mt103(&doc).unwrap();
+        let block4 = result.message.split("{4:\n").nth(1).unwrap();
+
+        let mut in_50k = false;
+        let mut name_lines: Vec<&str> = Vec::new();
+        for line in block4.lines() {
+            if line.starts_with(":50K:") {
+                in_50k = true;
+                continue;
+            }
+            if in_50k {
+                if line.starts_with(':') || line.starts_with('-') {
+                    break;
+                }
+                name_lines.push(line);
+            }
+        }
+
+        assert!(
+            !name_lines.is_empty(),
+            "expected at least one name line under :50K:"
+        );
+        for line in &name_lines {
+            assert!(
+                line.len() <= 35,
+                ":50K: name line {:?} exceeds 35 chars",
+                line
+            );
+        }
+        let joined: String = name_lines.join(" ");
+        assert!(
+            joined.contains("ACME CORPORATION") && joined.contains("HOLDINGS"),
+            "wrapped name should still spell out the original; got {joined:?}"
+        );
+        assert!(
+            !result
+                .warnings
+                .warnings
+                .iter()
+                .any(|w| w.field == ":50K:" && w.message.contains("truncated")),
+            "name fits within budget; no :50K: truncation warning expected, got {:?}",
+            result.warnings.warnings
+        );
+    }
+
+    #[test]
+    fn test_pacs008_to_mt103_warns_on_party_name_overflow() {
+        let mut doc = roundtrip_doc();
+        let tx = &mut doc.fi_to_fi_cstmr_cdt_trf.cdt_trf_tx_inf[0];
+        // 140 chars of A (the Max140Text limit) cannot fit in 3 lines x
+        // 35 chars (105 chars), so wrap_lines must signal overflow.
+        tx.dbtr.nm = Some(pacs008::Max140Text("A".repeat(140)));
+
+        let result = pacs008_to_mt103(&doc).unwrap();
+        assert!(
+            result
+                .warnings
+                .warnings
+                .iter()
+                .any(|w| w.field == ":50K:" && w.message.contains("truncated")),
+            "expected a :50K: truncation warning, got {:?}",
+            result.warnings.warnings
+        );
+    }
+
+    #[test]
+    fn test_pacs008_to_mt103_warns_on_remittance_overflow() {
+        let mut doc = roundtrip_doc();
+        let tx = &mut doc.fi_to_fi_cstmr_cdt_trf.cdt_trf_tx_inf[0];
+        // 5 ustrd lines of 100 chars each → 500 chars; cannot fit in
+        // 4 x 35 = 140.
+        tx.rmt_inf = Some(pacs008::RemittanceInformation22 {
+            ustrd: (0..5)
+                .map(|_| pacs008::Max140Text("X".repeat(100)))
+                .collect(),
+            strd: vec![],
+        });
+
+        let result = pacs008_to_mt103(&doc).unwrap();
+        assert!(
+            result
+                .warnings
+                .warnings
+                .iter()
+                .any(|w| w.field == ":70:" && w.message.contains("truncated")),
+            "expected a :70: truncation warning, got {:?}",
+            result.warnings.warnings
+        );
     }
 }
