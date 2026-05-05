@@ -81,10 +81,16 @@ pub fn mt940_to_camt053(
 
     // ------------------------------------------------------------------
     // Statement entries (:61: + :86:)
+    //
+    // MT940 statements are single-currency: the currency lives on :60F:
+    // (opening balance), not on each :61: line. camt.053's ReportEntry
+    // requires a currency on the entry amount, so inherit it from the
+    // opening balance.
     // ------------------------------------------------------------------
+    let stmt_currency = mt940.opening_balance.currency.as_str();
     let mut ntry_vec: Vec<camt053::ReportEntry13> = Vec::new();
     for sl in &mt940.statement_lines {
-        match build_entry(sl) {
+        match build_entry(sl, stmt_currency) {
             Ok(entry) => ntry_vec.push(entry),
             Err(e) => {
                 warnings.add(":61:", format!("skipped statement line: {e}"));
@@ -219,7 +225,22 @@ fn build_balance(
 }
 
 /// Build a `ReportEntry13` from a `StatementLine`.
-fn build_entry(sl: &StatementLine) -> Result<camt053::ReportEntry13, TranslationError> {
+///
+/// `stmt_currency` is the ISO 4217 currency that applies to the whole
+/// MT940 statement (taken from the `:60F:` opening balance). Returns
+/// [`TranslationError::MissingField`] when it is empty, since
+/// camt.053's `ReportEntry/Amt/@Ccy` is mandatory.
+fn build_entry(
+    sl: &StatementLine,
+    stmt_currency: &str,
+) -> Result<camt053::ReportEntry13, TranslationError> {
+    if stmt_currency.is_empty() {
+        return Err(TranslationError::MissingField {
+            field: "Bal[OPBD]/Amt/@Ccy".into(),
+            context: "mt940_to_camt053 entry currency".into(),
+        });
+    }
+
     let is_credit = sl.dc_mark == "C" || sl.dc_mark == "RC";
     let cdt_dbt_ind = if is_credit {
         camt053::CreditDebitCode::Crdt
@@ -229,8 +250,7 @@ fn build_entry(sl: &StatementLine) -> Result<camt053::ReportEntry13, Translation
 
     let amt = camt053::ActiveOrHistoricCurrencyAndAmount {
         value: camt053::ActiveOrHistoricCurrencyAndAmountSimpleType(sl.amount.clone()),
-        // Currency is not present at the entry level in MT940; use an empty placeholder.
-        ccy: camt053::ActiveOrHistoricCurrencyCode(String::new()),
+        ccy: camt053::ActiveOrHistoricCurrencyCode(stmt_currency.to_string()),
     };
 
     let val_dt = ChoiceWrapper::new(camt053::DateAndDateTime2Choice::Dt(camt053::ISODate(
@@ -346,5 +366,52 @@ mod tests {
         } else {
             panic!("expected IBAN account identification");
         }
+    }
+
+    #[test]
+    fn test_mt940_to_camt053_entry_currency_inherited_from_opening_balance() {
+        let msg = parse(MT940_RAW).unwrap();
+        let mt940 = parse_mt940(&msg.block4).unwrap();
+        let result = mt940_to_camt053(&mt940, "MSG001", "2023-06-15T10:00:00").unwrap();
+        let stmt = &result.message.bk_to_cstmr_stmt.stmt[0];
+
+        assert!(!stmt.ntry.is_empty(), "statement must have entries");
+        for (i, entry) in stmt.ntry.iter().enumerate() {
+            assert_eq!(
+                entry.amt.ccy.0, "EUR",
+                "entry {i} ccy must inherit from :60F: ({}), got {:?}",
+                mt940.opening_balance.currency, entry.amt.ccy.0
+            );
+        }
+    }
+
+    #[test]
+    fn test_mt940_to_camt053_empty_opening_currency_errors() {
+        let msg = parse(MT940_RAW).unwrap();
+        let mut mt940 = parse_mt940(&msg.block4).unwrap();
+        // Simulate a degenerate parser output where the opening balance
+        // has no currency. The translator should refuse rather than emit
+        // a schema-invalid empty Ccy on each entry.
+        mt940.opening_balance.currency.clear();
+
+        let result = mt940_to_camt053(&mt940, "MSG001", "2023-06-15T10:00:00").unwrap();
+        // The opening balance itself is built first (with an empty Ccy
+        // on the balance amount, which is a separate issue not in scope
+        // here); the entry-build path is what should refuse and warn.
+        let stmt = &result.message.bk_to_cstmr_stmt.stmt[0];
+        assert!(
+            stmt.ntry.is_empty(),
+            "all entries should have been rejected; got {} entries",
+            stmt.ntry.len()
+        );
+        assert!(
+            result
+                .warnings
+                .warnings
+                .iter()
+                .any(|w| w.field == ":61:" && w.message.contains("Bal[OPBD]/Amt/@Ccy")),
+            "expected a :61: warning citing the missing opening-balance currency, got: {:?}",
+            result.warnings.warnings
+        );
     }
 }
