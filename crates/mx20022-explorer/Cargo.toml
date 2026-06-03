@@ -1,0 +1,22 @@
+[package]
+name = "mx20022-explorer"
+version = "0.3.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Dev tool: link converted ISO 20022 fields back to the Rust mapping code that produced them"
+publish = false
+
+[[bin]]
+name = "mx20022-explorer"
+path = "src/main.rs"
+
+[dependencies]
+mx20022-translate = { workspace = true }
+mx20022-parse = { workspace = true }
+mx20022-model = { workspace = true, features = ["all"] }
+quick-xml = { workspace = true }
+serde_json = "1"
+
+[lints]
+workspace = true

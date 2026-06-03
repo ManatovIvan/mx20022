@@ -499,6 +499,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "mx20022-explorer"
+version = "0.3.0"
+dependencies = [
+ "mx20022-model",
+ "mx20022-parse",
+ "mx20022-translate",
+ "quick-xml",
+ "serde_json",
+]
+
+[[package]]
 name = "mx20022-model"
 version = "0.3.0"
 dependencies = [

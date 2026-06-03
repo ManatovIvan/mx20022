@@ -30,6 +30,7 @@ pub fn mt103_to_pacs008(
     // GroupHeader131
     // ------------------------------------------------------------------
     let sttlm_inf = pacs008::SettlementInstruction15 {
+        // @maps SttlmMtd
         sttlm_mtd: pacs008::SettlementMethod1Code::Inda,
         sttlm_acct: None,
         clr_sys: None,
@@ -42,8 +43,11 @@ pub fn mt103_to_pacs008(
     };
 
     let grp_hdr = pacs008::GroupHeader131::builder()
+        // @maps GrpHdr/MsgId
         .msg_id(pacs008::Max35Text(msg_id.to_string()))
+        // @maps GrpHdr/CreDtTm
         .cre_dt_tm(pacs008::ISODateTime(creation_time.to_string()))
+        // @maps GrpHdr/NbOfTxs
         .nb_of_txs(pacs008::Max15NumericText("1".to_string()))
         .sttlm_inf(sttlm_inf)
         .build()?;
@@ -53,6 +57,7 @@ pub fn mt103_to_pacs008(
     // ------------------------------------------------------------------
     let pmt_id = pacs008::PaymentIdentification13 {
         instr_id: Some(pacs008::Max35Text(mt103.senders_reference.clone())),
+        // @maps EndToEndId
         end_to_end_id: pacs008::Max35Text(mt103.senders_reference.clone()),
         tx_id: None,
         uetr: None,
@@ -63,23 +68,28 @@ pub fn mt103_to_pacs008(
     // IntrBkSttlmAmt
     // ------------------------------------------------------------------
     let intr_bk_sttlm_amt = pacs008::ActiveCurrencyAndAmount {
+        // @maps IntrBkSttlmAmt
         value: pacs008::ActiveCurrencyAndAmountSimpleType(mt103.interbank_settled_amount.clone()),
+        // @maps IntrBkSttlmAmt/@Ccy
         ccy: pacs008::ActiveCurrencyCode(mt103.currency.clone()),
     };
 
     // ------------------------------------------------------------------
     // IntrBkSttlmDt
     // ------------------------------------------------------------------
+    // @maps IntrBkSttlmDt
     let intr_bk_sttlm_dt = Some(pacs008::ISODate(mt103.value_date.clone()));
 
     // ------------------------------------------------------------------
     // Charge bearer
     // ------------------------------------------------------------------
+    // @maps ChrgBr
     let chrg_br = charges_to_code(&mt103.details_of_charges);
 
     // ------------------------------------------------------------------
     // Dbtr (ordering customer)
     // ------------------------------------------------------------------
+    // @maps Dbtr
     let dbtr = party_to_party_id(&mt103.ordering_customer);
     let dbtr_acct = mt103
         .ordering_customer
@@ -90,6 +100,7 @@ pub fn mt103_to_pacs008(
     // ------------------------------------------------------------------
     // DbtrAgt (ordering institution / fallback to empty)
     // ------------------------------------------------------------------
+    // @maps DbtrAgt
     let dbtr_agt = mt103
         .ordering_institution
         .as_ref()
@@ -98,6 +109,7 @@ pub fn mt103_to_pacs008(
     // ------------------------------------------------------------------
     // CdtrAgt (account with institution)
     // ------------------------------------------------------------------
+    // @maps CdtrAgt
     let cdtr_agt = mt103
         .account_with_institution
         .as_ref()
@@ -106,6 +118,7 @@ pub fn mt103_to_pacs008(
     // ------------------------------------------------------------------
     // Cdtr (beneficiary)
     // ------------------------------------------------------------------
+    // @maps Cdtr
     let cdtr = party_to_party_id(&mt103.beneficiary);
     let cdtr_acct = mt103
         .beneficiary
@@ -141,6 +154,7 @@ pub fn mt103_to_pacs008(
     // ------------------------------------------------------------------
     // RmtInf (:70:)
     // ------------------------------------------------------------------
+    // @maps RmtInf
     let rmt_inf = mt103.remittance_info.as_ref().map(|info| {
         // Split into 140-char chunks for Ustrd lines
         let chunks: Vec<pacs008::Max140Text> = info

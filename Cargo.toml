@@ -4,6 +4,7 @@ members = [
     "crates/mx20022",
     "crates/mx20022-cli",
     "crates/mx20022-codegen",
+    "crates/mx20022-explorer",
     "crates/mx20022-model",
     "crates/mx20022-parse",
     "crates/mx20022-translate",
